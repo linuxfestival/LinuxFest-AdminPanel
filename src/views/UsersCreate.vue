@@ -4,11 +4,17 @@
         <div class="col-md-8 order-md-1">
             <form class="needs-validation" @submit.prevent="createNewUser()">
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
+                        <label for="firstName">First Name(Persian Letter only)</label>   
                         <input type="text" class="form-control" placeholder="First Name..." v-model="inputData.firstName">
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
+                        <label for="firstName">Last Name(Persian Letter only)</label>   
                         <input type="text" class="form-control" placeholder="Last Name..." v-model="inputData.lastName">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="age">Age(Number only)</label>   
+                        <input type="number" class="form-control" placeholder="Age..." v-model="inputData.age">
                     </div>
                 </div>
 
@@ -21,7 +27,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="password">Password</label>
+                    <label for="password">Password (Strong Enough)</label>
                     <input type="password" class="form-control" id="password" placeholder="Password..." v-model="inputData.password">
                     <div class="invalid-feedback">
                         Please enter a valid password.
@@ -33,6 +39,15 @@
                     <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number..." v-model="inputData.phoneNumber">
                     <div class="invalid-feedback">
                         Please enter a valid password.
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="studentNumber">Student Number(if amirkabiri otherwise ignore)</label>
+                    <input type="text" class="form-control" id="studentNumber" placeholder="Amirkabir Student Number..." v-model="inputData.studentNumber">
+                    <div class="invalid-feedback">
+                        Please enter a valid studentNumber.
                     </div>
                 </div>
 
@@ -55,6 +70,8 @@
                     email : "",
                     password : "",
                     phoneNumber : "",
+                    studentNumber : "",
+                    age : ""
                 }
             }
         },
@@ -70,12 +87,28 @@
                     },
                     data: this.inputData
                 }).then(response => {
+                    this.$notify({
+                        group : "main",
+                        text : "User created successfully",
+                        title : "Success",
+                        type : "success",
+                        position: "top center",
+                        duration: 3000,
+                    })
                     console.log(response);
                     this.$router.push('/users');
                 }).catch(error => {
                     console.log(error);
                     if(error.response)
                         console.log(error.response);
+                    this.$notify({
+                        group : "main",
+                        text : "Error creating user.<br>Check Console for error message",
+                        title : "Error.",
+                        type : "error",
+                        position: "top center",
+                        duration: 5000,
+                    })
                 })
             }
         },

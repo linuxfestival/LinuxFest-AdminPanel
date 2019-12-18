@@ -4,7 +4,7 @@
         <router-link class="nav-link" to="/home">Home</router-link>
         <router-link class="nav-link" to="/users">Users</router-link>
         <router-link class="nav-link" to="/workshops">Workshops</router-link>
-        <router-link class="nav-link" to="/other">Other</router-link>
+        <router-link class="nav-link" to="/teachers">Teachers</router-link>
         <button class="nav-link btn btn-block btn-danger" @click="logout()">Logout</button>
     </nav>
     <nav class="nav flex-column align-items-start justify-content-start" v-else>

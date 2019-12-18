@@ -8,6 +8,8 @@ export default new Vuex.Store({
     token : localStorage.getItem('token') || '',
     adminApi : 'http://45.147.76.80/almightyone/',
     usersApi : 'http://45.147.76.80/users/',
+    workshopsApi : "http://45.147.76.80/workshops/",
+    teachersApi : "http://45.147.76.80/teachers/",
     loggedInAdmin : {},
   },
   mutations: {
@@ -44,6 +46,12 @@ export default new Vuex.Store({
     },
     usersApi : state => {
       return state.usersApi;
+    },
+    teachersApi: state => {
+      return state.teachersApi;
+    },
+    workshopsApi : state => {
+      return state.workshopsApi;
     },
     loggedInAdmin : state => {
       return state.loggedInAdmin

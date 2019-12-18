@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h1>users :</h1>
+        <h1>users ({{users.length}}) :</h1>
         <router-link to="/createuser" class="btn btn-success btn-md" >(+)Add New User</router-link>
-
-        <table class="table">
+        <div class="table-responsive mt-3">
+            <table class="table table-sm table-hover isansFont">
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
@@ -19,24 +19,25 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users">
+                <tr v-for="user in users" class="text-center" :key="users.indexOf(user)">
                     <td>{{users.indexOf(user) + 1}}</td>
-                    <td>{{user.firstName}}</td>
-                    <td>{{user.lastName}}</td>
+                    <td class="iransans">{{user.firstName}}</td>
+                    <td class="iransans">{{user.lastName}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.phoneNumber}}</td>
                     <td>{{user.age}}</td>
-                    <td>{{getJalali(user.createdAt).locale('fa').format('YYYY/M/D HH:mm')}}</td>
-                    <td>{{getJalali(user.updatedAt).locale('fa').format('YYYY/M/D HH:mm')}}</td>
+                    <td class="iransans">{{getJalali(user.createdAt).locale('fa').format('YYYY/M/D HH:mm')}}</td>
+                    <td class="iransans">{{getJalali(user.updatedAt).locale('fa').format('YYYY/M/D HH:mm')}}</td>
                     <td v-if="user.studentNumber == undefined">no</td>
                     <td v-else>{{user.studentNumber}}</td>
-                    <td>
-                        <button @click="viewUser(user._id)" class="btn btn-sm btn-warning btn-fab btn-fab-mini">Show/Edit</button>
-                        <button @click="deleteUser(user._id)" class="btn btn-sm btn-danger btn-fab btn-fab-mini">Delete</button>
+                    <td class="d-flex align-items-center justify-content-center">
+                        <button @click="viewUser(user._id)" class="btn btn-just-icon btn-warning mr-1"><i class="material-icons">edit</i></button>
+                        <button @click="deleteUser(user._id)" class="btn btn-just-icon btn-danger"><i class="material-icons">close</i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
 </template>
 
@@ -60,19 +61,21 @@
             },
             deleteUser: function(userId) {
                 console.log('delete user ', userId);
-                axios({
-                    url : this.$store.getters.usersApi + userId,
-                    method : 'DELETE',
-                    headers : {
-                        'Authorization' : 'Bearer ' + this.$store.getters.token,
-                        'Content-Type' : 'application/json'
-                    }
-                }).then(response => {
-                    console.log(response);
-                    this.getListOfUsers();
-                }).catch(error => {
-                    console.log(error.response);
-                })
+                if(window.confirm("Are you sure to delete user with id " + userId + " ?")) {
+                    axios({
+                        url : this.$store.getters.usersApi + userId,
+                        method : 'DELETE',
+                        headers : {
+                            'Authorization' : 'Bearer ' + this.$store.getters.token,
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then(response => {
+                        console.log("delete user response",response);
+                        this.getListOfUsers();
+                    }).catch(error => {
+                        console.log(error.response);
+                    })
+                }
             },
             getListOfUsers : function() {
                 axios({
@@ -101,5 +104,11 @@
 </script>
 
 <style scoped>
-
+    .btn-just-icon {
+        width:25px;
+        height:25px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
 </style>
