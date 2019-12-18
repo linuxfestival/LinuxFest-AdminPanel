@@ -1,32 +1,28 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <TopMenu class="col-md-2"></TopMenu>
+      <router-view class="col-md-10"/>
     </div>
-    <router-view/>
   </div>
 </template>
 
+<script>
+  import TopMenu from '@/components/TopMenu'
+  export default {
+    name : 'App',
+    components : {
+      TopMenu
+    },computed :{
+      isLoggedIn : function() {
+        return this.$store.getters.isLoggedIn;
+      }
+    }
+  }
+</script>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.hv-100 {
+  min-height:100vh;
 }
 </style>
