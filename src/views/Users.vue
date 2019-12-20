@@ -31,7 +31,7 @@
                     <td v-if="user.studentNumber == undefined">no</td>
                     <td v-else>{{user.studentNumber}}</td>
                     <td class="d-flex align-items-center justify-content-center">
-                        <button @click="viewUser(user._id)" class="btn btn-just-icon btn-warning mr-1"><i class="material-icons">edit</i></button>
+                        <router-link :to="'users/' + user._id" class="btn btn-just-icon btn-warning mr-1"><i class="material-icons">edit</i></router-link>
                         <button @click="deleteUser(user._id)" class="btn btn-just-icon btn-danger"><i class="material-icons">close</i></button>
                     </td>
                 </tr>
