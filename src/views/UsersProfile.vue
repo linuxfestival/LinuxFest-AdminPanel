@@ -27,13 +27,6 @@
                     </div>
                 </div>
 
-                <!-- <div class="mb-3">
-                    <label for="password">Password (Strong Enough)</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password..." v-model="user.password">
-                    <div class="invalid-feedback">
-                        Please enter a valid password.
-                    </div>
-                </div> -->
 
                 <div class="mb-3">
                     <label for="phoneNumber">Phone Number</label>
@@ -96,7 +89,7 @@
 
             })
             },
-            getAllUsers() {
+            getUser() {
                 axios({
                     url : this.$store.getters.usersApi,
                     method : 'GET',
@@ -106,9 +99,8 @@
                     }
                 }).then(response => {
                     console.log(response);
-                    // this.users = response.data;
-                    for(let i = 0 ; i < response.data.length ; i++) {
-                        if(response.data[i]._id == this.$route.params.id) {
+                    for(let i = 0 ; i < response.data.length ;i++){
+                        if(response.data[i]._id == this.$route.params.id){
                             this.user = response.data[i];
                             break;
                         }
@@ -123,17 +115,21 @@
             },
             updateUser() {
                 console.log("update user with id ", this.$route.params.id);
-                delete this.user.workshops;
-                delete this.user.createdAt;
-                delete this.user.updatedAt;
-                delete this.user._id;
-                delete this.user.__v;
+                let updatedUser = {
+                    age : this.user.age,
+                    email : this.user.email,
+                    firstName : this.user.firstName,
+                    lastName : this.user.lastName,
+                    phoneNumber : this.user.phoneNumber,
+                    studentNumber : this.user.studentNumber
+                }
+
                 console.log("user obj to send " , this.user);
 
                 axios({
                     url : this.$store.getters.usersApi + this.$route.params.id,
                     method : "PATCH",
-                    data: this.user,
+                    data: updatedUser,
                     headers : {
                         "Authorization" : "Bearer " + this.$store.getters.token,
                         "Content-Type" : "application/json"
@@ -148,7 +144,7 @@
         },
         created() {
             // this.getUserWithId();
-            this.getAllUsers();
+            this.getUser();
         }
     }
 </script>

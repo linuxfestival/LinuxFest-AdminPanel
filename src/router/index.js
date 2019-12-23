@@ -11,6 +11,7 @@ import WorkshopCreate from "@/views/WorkshopCreate";
 import Teachers from "@/views/Teachers";
 import TeacherCreate from "@/views/TeacherCreate"
 import TeacherProfile from "@/views/TeacherProfile"
+import WorkshopProfile from "@/views/WorkshopProfile";
 
 Vue.use(VueRouter);
 
@@ -47,6 +48,10 @@ const routes = [
         path : '/createworkshop',
         name : 'workshopcreate',
         component : WorkshopCreate,
+    },{
+        path : '/workshops/:id',
+        name : 'workshopProfile',
+        component : WorkshopProfile 
     },
     {
         path : '/teachers',
@@ -71,7 +76,7 @@ const router = new VueRouter({
     routes
 });
 
-const requiredAuth = ['/home', '/users' , '/workshops' , '/users/:id', '/createuser' , '/createworkshop' , '/teachers', '/teachers/:id' , '/createteacher'];
+const requiredAuth = ['/home', '/users' , '/workshops' , '/workshops/:id' , '/users/:id', '/createuser' , '/createworkshop' , '/teachers', '/teachers/:id' , '/createteacher'];
 const requiredNotAuth = ['/'];
 
 router.beforeEach((to,from,next) => {
