@@ -17,15 +17,16 @@
                         </textarea>
                 </div>
             
-                <div class="mb-3">
-                        <label for="imagePath">Image Path (Optional - Set Empty until Fixed):</label>   
-                        <input type="url" class="form-control" id="imagePath" placeholder="ImagePath..." v-model="newTeacher.imagePath">
-                </div>
+<!--                <div class="mb-3">-->
+<!--                        <label for="imagePath">Image Path (Optional - Set Empty until Fixed):</label>   -->
+<!--                        <input type="url" class="form-control" id="imagePath" placeholder="ImagePath..." v-model="newTeacher.imagePath">-->
+<!--                </div>-->
 
             
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Create New Teacher</button>
             </form>
+
         </div>
     </div>
 </template>
@@ -39,7 +40,7 @@ export default {
             newTeacher: {
                 fullName : "",
                 description: "",
-                imagePath : ""
+                // imagePath : ""
             }
         }
     },
@@ -49,7 +50,7 @@ export default {
             axios({
                 url : this.$store.getters.teachersApi,
                 method : "POST",
-                data : {"teacher" :this.newTeacher},
+                data : this.newTeacher,
                 headers : {
                     "Authorization" : "Bearer " + this.$store.getters.token,
                     "Content-Type" : "application/json"

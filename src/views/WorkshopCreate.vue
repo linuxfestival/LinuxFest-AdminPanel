@@ -41,7 +41,7 @@
                     display-format="dddd jDD jMMMM jYYYY HH:mm" 
                     input-class="form-control"/>
 
-                <p class="mt-3" for="">Select End Time (Required) :</p>
+                <p class="mt-3">Select End Time (Required) :</p>
                 <date-picker 
                     v-model="inputWorkshop.endTime" 
                     :clearable="true" 
@@ -85,10 +85,10 @@ export default {
             return jalali(date);
         },
 
-        backendizeTeachersStructrue() {
+        backendizeTeachersStructure() {
             let teachers = [];
             for(let i = 0; i < this.inputWorkshop.teachers.length ; i++) {
-                teachers.push({"teacher" : this.inputWorkshop.teachers[i]})
+                teachers.push({"id" : this.inputWorkshop.teachers[i]})
             }
             return teachers;
         },
@@ -96,13 +96,13 @@ export default {
         createNewWorkshop: function() {
             //create new workshop
             console.log("Create new workshop");
-            this.inputWorkshop.teachers = this.backendizeTeachersStructrue(this.inputWorkshop.teachers);
+            this.inputWorkshop.teachers = this.backendizeTeachersStructure(this.inputWorkshop.teachers);
             console.log(this.inputWorkshop); 
 
             axios({
                 url : this.$store.getters.workshopsApi,
                 method : "POST",
-                data : {"workshop" : this.inputWorkshop},
+                data :  this.inputWorkshop,
                 headers : {
                     Authorization : "Bearer " + this.$store.getters.token,
                     "Content-Type" : "application/json"

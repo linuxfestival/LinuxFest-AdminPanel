@@ -19,16 +19,17 @@
                         </textarea>
                 </div>
             
-                <div class="mb-3">
-                        <label for="imagePath">Image Path (Optional - Set Empty until Fixed):</label>   
-                        <input type="url" class="form-control" id="imagePath" placeholder="ImagePath..." v-model="teacher.imagePath">
-                </div>
-
-            
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Update Teacher</button>
             </form>
-        </div>
+
+                <br>
+                <br>
+            <form @submit.prevent="submitFile()">
+                <input class="form-control" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                <button class="btn btn-success ">Upload Image</button>
+            </form>
+            </div>
         </div>
 
     </div>
@@ -42,12 +43,35 @@
         data() {
             return {
                 teacher : {},
-                workshops : []
+                workshops : [],
+                file : ''
             }
         },
         methods : {
             getJalali(date) {
                 return jalali(date);
+            },
+            submitFile() {
+                let formData = new FormData();
+                formData.append('file', this.file);
+                axios.post( this.$store.getters.teachersApi + 'pic/' + this.teacher._id,
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization' : 'Bearer ' + this.$store.getters.token
+                        }
+                    }
+                ).then(response => {
+                    console.log(response);
+                    console.log('SUCCESS!!');
+                }).catch(error => {
+                    console.log(error.response);
+                    console.log('FAILURE!!');
+                });
+            },
+            handleFileUpload() {
+                this.file = this.$refs.file.files[0];
             },
             getTeacherWithId(){
                 console.log("Getting teacher with id " + this.$route.params.id);
@@ -66,7 +90,7 @@
                 console.log(error);
                 // console.log("user obj to send " , this.user);
                 if(error.response)
-                    console.log(error.resopnse);
+                    console.log(error.response);
             }).finally(() => {
 
             })
@@ -82,7 +106,7 @@
                 axios({
                     url : this.$store.getters.teachersApi + "manage/" + this.$route.params.id,
                     method : "PATCH",
-                    data: {"teacher" : this.teacher},
+                    data:  this.teacher,
                     headers : {
                         "Authorization" : "Bearer " + this.$store.getters.token,
                         "Content-Type" : "application/json"
