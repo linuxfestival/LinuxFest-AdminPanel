@@ -32,27 +32,38 @@
                     <option v-for="teacher in availableTeachers" :key="availableTeachers.indexOf(teacher)" :value="teacher._id">{{teacher.fullName}}</option>
                 </select>
 
-                <p class="mt-3">Select Start Time (Required) :</p>
-                <date-picker 
-                    v-model="inputWorkshop.startTime"
-                    :clearable="true"
-                    type="datetime" 
-                    format="YYYY-MM-DD HH:mm"
-                    display-format="dddd jDD jMMMM jYYYY HH:mm" 
-                    input-class="form-control"/>
-
-                <p class="mt-3">Select End Time (Required) :</p>
-                <date-picker 
-                    v-model="inputWorkshop.endTime" 
-                    :clearable="true" 
-                    type="datetime" 
-                    format="YYYY-MM-DD HH:mm"
-                    display-format="dddd jDD jMMMM jYYYY HH:mm" 
-                    input-class="form-control" />
+                <div class="row" v-for="inputTime in inputWorkshop.times">
+                    <div class="col-md-6">
+                        Start Time :
+                        <date-picker
+                                v-model="inputTime.startTime"
+                                :clearable="true"
+                                type="datetime"
+                                format="YYYY-MM-DD HH:mm"
+                                display-format="dddd jDD jMMMM jYYYY HH:mm"
+                                input-class="form-control"/>
+                    </div>
+                    <div class="col-md-6">
+                        End Time :
+                        <date-picker
+                                v-model="inputTime.endTime"
+                                :clearable="true"
+                                type="datetime"
+                                format="YYYY-MM-DD HH:mm"
+                                display-format="dddd jDD jMMMM jYYYY HH:mm"
+                                input-class="form-control"/>
+                    </div>
+                </div>
 
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Create New Workshop</button>
+                <button class="btn btn-primary btn-lg btn-block">Create New Workshop</button>
             </form>
+
+            <hr>
+            <button class="btn btn-info" @click="addTime()">Add time</button>
+            <button class="btn btn-warning" @click="removeTime()">Remove time</button>
+            <hr>
+            <button class="btn btn-secondary" @click="printInput()">View Input</button>
         </div>
     </div>
 </template>
@@ -75,7 +86,8 @@ export default {
                 description: "Ghamsar os is leading unix based systems.",
                 teachers : [],
                 startTime : "",
-                endTime : ""
+                endTime : "",
+                times : []
             },
             availableTeachers : [],
         }
@@ -83,6 +95,21 @@ export default {
     methods : {
         getJalali(date) {
             return jalali(date);
+        },
+
+        printInput() {
+            console.log(this.inputWorkshop);
+        },
+
+        addTime() {
+            this.inputWorkshop.times.push({
+                startTime : "",
+                endTime : "",
+            })
+        },
+
+        removeTime() {
+            this.inputWorkshop.times.pop();
         },
 
         backendizeTeachersStructure() {

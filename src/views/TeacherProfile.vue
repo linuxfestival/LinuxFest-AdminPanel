@@ -26,7 +26,7 @@
                 <br>
                 <br>
             <form @submit.prevent="submitFile()">
-                <input class="form-control" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                <input class="form-control" ref="file" type="file" @change="handleFileUpload()"/>
                 <button class="btn btn-success ">Upload Image</button>
             </form>
             </div>
@@ -53,7 +53,10 @@
             },
             submitFile() {
                 let formData = new FormData();
-                formData.append('file', this.file);
+                formData.append('mainPic', this.file);
+                console.log(this.file);
+                console.log(formData);
+
                 axios.post( this.$store.getters.teachersApi + 'pic/' + this.teacher._id,
                     formData,
                     {

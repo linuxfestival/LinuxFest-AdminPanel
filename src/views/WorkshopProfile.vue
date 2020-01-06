@@ -1,60 +1,66 @@
 <template>
-    <div>    
+    <div>
         <h1>View workshop details with id {{this.$route.params.id}}</h1>
                 <div class="col-md-8 order-md-1">
             <form class="needs-validation" @submit.prevent="updateWorkshop()">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="workshopTitle">Title</label>   
+                        <label for="workshopTitle">Title</label>
                         <input type="text" class="form-control" id="workshopTitle" placeholder="Workshop Title..." v-model="workshop.title">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="price">Price(ex : 10000 -> 10 hezar toman)</label>   
+                        <label for="price">Price(ex : 10000 -> 10 hezar toman)</label>
                         <input type="text" id="price" class="form-control" placeholder="Price..." v-model="workshop.price">
                     </div>
                 </div>
 
                 <div class="mb-3">
-                        <label for="description">Description:</label>   
-                        <textarea class="form-control" id="description" placeholder="Description..." v-model="workshop.description">
-
-                        </textarea>
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" id="description" placeholder="Description..." v-model="workshop.description"></textarea>
                 </div>
 
                <div class="mb-3">
-                        <label for="cap">Capacity (Positive Integer):</label>   
+                        <label for="cap">Capacity (Positive Integer):</label>
                         <input type="number" class="form-control" id="cap" min="0" max="500" placeholder="Capacity..." v-model="workshop.capacity">
-
                 </div>
-                
-                <!-- <label for="teachers">Select Teachers(Required , Can Select Multiple Teachers):</label>
-                <select id="teachers" class="custom-select" multiple v-model="workshop.teachers">
-                    <option v-bind:selected="[{'selected' : teacherIsInWorkshopTeachers(teacher._id)}]" v-for="teacher in availableTeachers" :key="availableTeachers.indexOf(teacher)" :value="teacher._id">{{teacher.fullName}}</option>
-                </select> -->
 
-                <p class="mt-3">Select Start Time (Required) :</p>
-                <date-picker 
-                    v-model="workshop.startTime"
-                    :clearable="true"
-                    type="datetime" 
-                    format="YYYY-MM-DD HH:mm"
-                    display-format="dddd jDD jMMMM jYYYY HH:mm" 
-                    input-class="form-control"/>
-
-                <p class="mt-3" for="">Select End Time (Required) :</p>
-                <date-picker 
-                    v-model="workshop.endTime" 
-                    :clearable="true" 
-                    type="datetime" 
-                    format="YYYY-MM-DD HH:mm"
-                    display-format="dddd jDD jMMMM jYYYY HH:mm" 
-                    input-class="form-control" />
-
+                <div class="row" v-for="inputTime in workshop.times">
+                    <div class="col-md-6">
+                        Start Time :
+                        <date-picker
+                                v-model="inputTime.startTime"
+                                :clearable="true"
+                                type="datetime"
+                                format="YYYY-MM-DD HH:mm"
+                                display-format="dddd jDD jMMMM jYYYY HH:mm"
+                                input-class="form-control"/>
+                    </div>
+                    <div class="col-md-6">
+                        End Time :
+                        <date-picker
+                                v-model="inputTime.endTime"
+                                :clearable="true"
+                                type="datetime"
+                                format="YYYY-MM-DD HH:mm"
+                                display-format="dddd jDD jMMMM jYYYY HH:mm"
+                                input-class="form-control"/>
+                    </div>
+                </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Update Curent Workshop</button>
+
+                <label for="teachers">Select Teachers(Required , Can Select Multiple Teachers):</label>
+                <select id="teachers" class="custom-select" multiple>
+                    <option v-for="teacher in teachers" :key="teachers.indexOf(teacher)" :value="teacher.id">{{teacher.fullName}}</option>
+                </select>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Update Current Workshop</button>
             </form>
 
             <hr>
+            <button class="btn btn-info" @click="addTime()">Add time</button>
+            <button class="btn btn-warning" @click="removeTime()">Remove time</button>
+            <hr>
+            <button class="btn btn-secondary" @click="printInput()">View Input</button>
 
             <h4>List of Participants:</h4>
             <table class="table table-sm table-hover table-border">
@@ -62,7 +68,7 @@
                     <th>FirstName</th>
                     <th>LastName</th>
                     <th>Email</th>
-                    <th>Actions</th>    
+                    <th>Actions</th>
                 </tr>
                 <tr v-for="participant in participants" :key="participants.indexOf(participant)">
                     <th>{{participant.firstName }}</th>
@@ -102,6 +108,9 @@ export default {
         return {
             workshop : {},
             participants : [],
+            currentTeachers : [],
+            allTeachers : [],
+            selectedTeachers : [],
             users : [],
             selectedUsersToAdd : [],
             availableTeachers : []
@@ -112,12 +121,33 @@ export default {
             return jalali(date);
         },
 
+        printInput() {
+            console.log(this.workshop);
+        },
+
+        addTime() {
+            this.workshop.times.push({
+                startTime : "",
+                endTime : "",
+                _id : this.$route.params.id
+            })
+        },
+
+        removeTime() {
+            this.workshop.times.pop();
+        },
+
         updateWorkshop(){
             console.log("update workshop with id ", this.$route.params.id);
-            // console.log("update payload" ,this.workshop);
             delete this.workshop._id;
-            delete this.workshop._v;
+            delete this.workshop.__v;
             delete this.workshop.album;
+            delete this.workshop.participantsNumber;
+
+            for(let i = 0 ; i < this.workshop.times.length ; i++) {
+                this.workshop.times[i]._id = this.$route.params.id;
+            }
+
             console.log("update payload" ,this.workshop);
             axios({
                 url : this.$store.getters.workshopsApi + "manage/" + this.$route.params.id,
@@ -125,7 +155,7 @@ export default {
                 headers : {
                     Authorization : "Bearer " + this.$store.getters.token,
                 },
-                data:{"workshop" : this.workshop}
+                data:this.workshop
             }).then(response => {
                 console.log(response.data);
                 this.getCurrentWorkshop();
@@ -144,9 +174,8 @@ export default {
             }).then(response => {
                 console.log(response.data);
                 this.workshop = response.data.workshop;
-                this.participants = response.data.participants; 
-                console.log('workshop ', this.workshop);
-                console.log('participants ', this.participants);
+                this.participants = response.data.participants;
+                this.teachers = response.data.teachers;
             }).catch(error =>{
                 console.log(error.response);
             })
@@ -208,9 +237,8 @@ export default {
 
             Promise.all(promises).then((value) => {
                 console.log(value);
-                console.log('all promises done')
+                console.log('all promises done');
                 this.getCurrentWorkshop();
-                // this.getAllUsers();
             }).catch(error => {
                 console.log(error);
                 console.log("some error occured");
@@ -236,15 +264,13 @@ export default {
                 }
             }).then(response => {
                 console.log(response);
-                // this.availableTeachers = response.data;
-                for(let i = 0 ; i < response.data.length ; i++) {
-                    this.availableTeachers.push(response.data[i].teacher);
-                }
-                console.log(this.availableTeachers);
+                this.availableTeachers = response.data;
+                console.log('available teachers ',this.availableTeachers);
             }).catch(error => {
                 console.log(error.response);
             })
         },
+
         teacherIsInWorkshopTeachers(teacherId) {
             for(let i = 0; i < this.workshop.teachers.length ; i++){
                 if(this.workshop.teachers[i]._id == teacherId)
@@ -253,13 +279,13 @@ export default {
         return false;
         }
     },
-    
+
     created() {
         this.getCurrentWorkshop();
         this.getAllUsers();
         this.getAvailableTeachers();
     },
-    
+
     computed: {
             availableUsersToAdd () {
                 return this.users.filter(user => {
