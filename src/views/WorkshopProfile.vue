@@ -90,6 +90,17 @@
                 </select>
                 <button class="btn btn-md btn-info mt-3" >Add Selected Users to Workshop</button>
             </form>
+
+                    <div class="row mt-3 mb-3">
+                        <div class="col-md-12">
+                            <form @submit.prevent="uploadWorkshopAlbum()">
+                                <input v-for="imageField in availableImageFields" type="file" class="form-control" ref="file" @change="handleFileUpload()">
+                                <button class="btn btn-info">Upload Images</button>
+                            </form>
+                            <button @click="addImageFieldForUpload()">Add Image Field</button>
+                            <button @click="removeImageFieldForUpload()">Remove Image Field</button>
+                        </div>
+                    </div>
         </div>
     </div>
 </template>
@@ -113,10 +124,22 @@ export default {
             selectedTeachers : [],
             users : [],
             selectedUsersToAdd : [],
-            availableTeachers : []
+            availableTeachers : [],
+            availableImageFields : [],
+            files : [],
+
         }
     },
     methods : {
+
+        removeImageFieldForUpload() {
+            this.availableImageFields.pop();
+        },
+
+        addImageFieldForUpload() {
+            this.availableImageFields.push(this.availableImageFields.length);
+        },
+
         getJalali(date){
             return jalali(date);
         },
@@ -133,6 +156,35 @@ export default {
             })
         },
 
+        uploadWorkshopAlbum: function() {
+            let formData = new FormData();
+            formData.append('pictures', this.files);
+            axios({
+                url : this.$store.getters.workshopsApi + 'pic/album/' + this.$route.params.id,
+                method : "POST",
+                headers : {
+                    'Authorization' : 'Bearer ' + this.$store.getters.token,
+                    'Content-Type' : 'multipart/form-data'
+                },
+                data: formData,
+            }).then(response => {
+                console.log(response);
+                console.log('SUCCESS ALBUM UPLOAD')
+            }).catch(error => {
+                console.log(error);
+                console.log(error.response);
+            })
+        },
+
+        handleFileUpload() {
+            console.log("handle file upload called");
+            console.log(this.$refs.file);
+            this.files = [];
+            for(let i =0 ; i < this.$refs.file.length ; i++) {
+                this.files.push(this.$refs.file[i].files[0])
+            }
+            console.log(this.files);
+        },
         removeTime() {
             this.workshop.times.pop();
         },
