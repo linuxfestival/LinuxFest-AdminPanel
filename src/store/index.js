@@ -6,12 +6,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token : localStorage.getItem('token') || '',
-    adminApi : 'http://45.147.76.80/almightyone/',
-    usersApi : 'http://45.147.76.80/users/',
-    workshopsApi : "http://45.147.76.80/workshops/",
-    teachersApi : "http://45.147.76.80/teachers/",
+    adminApi : 'http://skillcenter.aut.ac.ir/linuxfestapialmightyone/',
+    usersApi : 'http://skillcenter.aut.ac.ir/linuxfestapiusers/',
+    workshopsApi : "http://skillcenter.aut.ac.ir/linuxfestapiworkshops/",
+    teachersApi : "http://skillcenter.aut.ac.ir/linuxfestapiteachers/",
     loggedInAdmin : {},
   },
+
   mutations: {
     logout: function(state) {
       state.token = '';

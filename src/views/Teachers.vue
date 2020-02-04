@@ -20,7 +20,7 @@
                     <td>{{teachers.indexOf(teacher) + 1}}</td>
                     <td class="iransans">{{teacher.teacher.fullName}}</td>
                     <td class="iransans">{{teacher.teacher.description}}</td>
-                    <td><img class="avatar-image" :src="'http://45.147.76.80' + teacher.teacher.picUrl" :alt="teacher.teacher.fullName + 's image. bad url'"></td>
+                    <td><img class="avatar-image" :src="'http://skillcenter.aut.ac.ir/linuxfestapi' + teacher.teacher.picUrl.replace('/','')" :alt="teacher.teacher.fullName + 's image. bad url'"></td>
                     <td class="iransans">{{getJalali(teacher.teacher.createdAt).locale('fa').format('YYYY/M/D HH:mm')}}</td>
                     <td class="iransans">{{getJalali(teacher.teacher.updatedAt).locale('fa').format('YYYY/M/D HH:mm')}}</td>
                     <td class="d-flex align-items-center justify-content-center">

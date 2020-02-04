@@ -84,7 +84,7 @@
                 console.log(error);
                 console.log("user obj to send " , this.user);
                 if(error.response)
-                    console.log(error.resopnse);
+                    console.log(error.response);
             }).finally(() => {
 
             })
