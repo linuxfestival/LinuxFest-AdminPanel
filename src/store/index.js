@@ -6,10 +6,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token : localStorage.getItem('token') || '',
-    adminApi : 'http://skillcenter.aut.ac.ir/linuxfestapialmightyone/',
-    usersApi : 'http://skillcenter.aut.ac.ir/linuxfestapiusers/',
-    workshopsApi : "http://skillcenter.aut.ac.ir/linuxfestapiworkshops/",
-    teachersApi : "http://skillcenter.aut.ac.ir/linuxfestapiteachers/",
+    adminApi : 'http://skillcenter.aut.ac.ir/linuxfestapi/almightyone/',
+    usersApi : 'http://skillcenter.aut.ac.ir/linuxfestapi/users/',
+    workshopsApi : "http://skillcenter.aut.ac.ir/linuxfestapi/workshops/",
+    teachersApi : "http://skillcenter.aut.ac.ir/linuxfestapi/teachers/",
     loggedInAdmin : {},
   },
 

@@ -6,7 +6,6 @@
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control mt-2 w-50" placeholder="Password" v-model="inputData.password">
             <button class="btn btn-lg btn-primary btn-block mt-2 w-50" type="submit">Sign in</button>
-
         </form>
 
 </template>
