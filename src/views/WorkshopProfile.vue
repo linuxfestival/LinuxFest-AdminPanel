@@ -71,12 +71,14 @@
             <h4>List of Participants:</h4>
             <table class="table table-sm table-hover table-border">
                 <tr>
+                    <th>#</th>
                     <th>FirstName</th>
                     <th>LastName</th>
                     <th>Email</th>
                     <th>Actions</th>
                 </tr>
-                <tr v-for="participant in participants" :key="participants.indexOf(participant)">
+                <tr v-for="(participant, index) in participants" :key="index">
+                    <th>{{index + 1}}</th>
                     <th>{{participant.firstName }}</th>
                     <th>{{participant.lastName }}</th>
                     <th>{{participant.email}}</th>
