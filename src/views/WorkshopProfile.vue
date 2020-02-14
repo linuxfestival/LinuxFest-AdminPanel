@@ -28,7 +28,7 @@
                            v-model="workshop.capacity">
                 </div>
 
-                <div class="row" v-for="inputTime in workshop.times">
+                <div class="row" v-for="(inputTime, index) in workshop.times" :key="index">
                     <div class="col-md-6">
                         Start Time :
                         <date-picker
@@ -69,12 +69,32 @@
             <button class="btn btn-secondary" @click="printInput()">View Input</button>
 
             <h4>List of Participants:</h4>
+            <download-excel
+                class="btn btn-md btn-info mt-3 mb-3"
+                :data="participants"
+                :fields="exportFieldsAll"
+                :name="workshop.title + '-FULLDATA-' + (new Date()) + '.xls'"
+                >
+                Download this list as excel with phone number
+            </download-excel>
+            <br>
+            <download-excel
+                class="btn btn-md btn-info mt-3 mb-3"
+                :data="participants"
+                :fields="exportFieldsEssentials"
+                :name="workshop.title + '-ESSENTIALS-' + (new Date()) + '.xls'"
+                >
+                Download this list as excel essentials only
+            </download-excel>
+
+
             <table class="table table-sm table-hover table-border">
                 <tr>
                     <th>#</th>
                     <th>FirstName</th>
                     <th>LastName</th>
                     <th>Email</th>
+                    <th>Student Num</th>
                     <th>Actions</th>
                 </tr>
                 <tr v-for="(participant, index) in participants" :key="index">
@@ -82,6 +102,7 @@
                     <th>{{participant.firstName }}</th>
                     <th>{{participant.lastName }}</th>
                     <th>{{participant.email}}</th>
+                    <th>{{participant.studentNumber}}</th>
                     <th>
                         <button @click="deleteUserFromWorkshop(participant._id)"><i class="material-icons">close</i>
                         </button>
@@ -106,7 +127,7 @@
             <div class="row mt-3 mb-3">
                 <div class="col-md-12">
                     <form @submit.prevent="uploadWorkshopAlbum()">
-                        <input v-for="imageField in availableImageFields" type="file" class="form-control" ref="file"
+                        <input v-for="(imageField, index) in availableImageFields" :key="index" type="file" class="form-control" ref="file"
                                @change="handleFileUpload()">
                         <button class="btn btn-info">Upload Images</button>
                     </form>
@@ -143,6 +164,19 @@
                 availableTeachers: [],
                 availableImageFields: [],
                 files: [],
+                exportFieldsAll : {
+                    'First Name': 'firstName',
+                    'Last Name': 'lastName',
+                    'Phone Number': 'phoneNumber',
+                    'Student Number' : 'studentNumber',
+                    'Email' : "email"
+                },
+                exportFieldsEssentials : {
+                    'First Name': 'firstName',
+                    'Last Name': 'lastName',
+                    'Student Number' : 'studentNumber',
+                    'Email' : "email"
+                }
 
             }
         },
