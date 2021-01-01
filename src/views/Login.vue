@@ -1,11 +1,16 @@
 <template>
-        <form class="form-signin d-flex align-items-center justify-content-center flex-column" @submit.prevent="login()">
+        <form class="form-signin d-flex align-items-center justify-content-center flex-column"
+              @submit.prevent="login()">
             <h1 class="h3 mb-3 font-weight-normal w-50">Please sign in</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
             <input type="password" id="inputEmail" class="form-control form-control-success mt-2 w-50" placeholder="Username" v-model="inputData.username" autofocus="true">
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control mt-2 w-50" placeholder="Password" v-model="inputData.password">
-            <button class="btn btn-lg btn-primary btn-block mt-2 w-50" type="submit">Sign in</button>
+            <input type="password" id="inputPassword"
+                   class="form-control mt-2 w-50"
+                   placeholder="Password"
+                   v-model="inputData.password">
+            <button class="btn btn-lg btn-primary btn-block mt-2 w-50"
+                    type="submit">Sign in</button>
         </form>
 
 </template>

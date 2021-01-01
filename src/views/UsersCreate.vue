@@ -6,21 +6,36 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="firstName">First Name(Persian Letter only)</label>   
-                        <input type="text" class="form-control" placeholder="First Name..." v-model="inputData.firstName">
+                        <input type="text"
+                               id = "firstName"
+                               class="form-control"
+                               placeholder="First Name..."
+                               v-model="inputData.firstName">
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="firstName">Last Name(Persian Letter only)</label>   
-                        <input type="text" class="form-control" placeholder="Last Name..." v-model="inputData.lastName">
+                        <label for="lastName">Last Name(Persian Letter only)</label>
+                        <input type="text"
+                               id="lastName"
+                               class="form-control"
+                               placeholder="Last Name..."
+                               v-model="inputData.lastName">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="age">Age(Number only)</label>   
-                        <input type="number" class="form-control" placeholder="Age..." v-model="inputData.age">
+                        <input id="age"
+                               type="number"
+                               class="form-control"
+                               placeholder="Age..."
+                               v-model="inputData.age">
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com" v-model="inputData.email">
+                    <input type="email"
+                           class="form-control"
+                           id="email" placeholder="you@example.com"
+                           v-model="inputData.email">
                     <div class="invalid-feedback">
                         Please enter a valid email.
                     </div>
@@ -28,7 +43,10 @@
 
                 <div class="mb-3">
                     <label for="password">Password (Strong Enough)</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password..." v-model="inputData.password">
+                    <input type="password"
+                           class="form-control"
+                           id="password" placeholder="Password..."
+                           v-model="inputData.password">
                     <div class="invalid-feedback">
                         Please enter a valid password.
                     </div>
@@ -36,7 +54,11 @@
 
                 <div class="mb-3">
                     <label for="phoneNumber">Phone Number</label>
-                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number..." v-model="inputData.phoneNumber">
+                    <input type="text"
+                           class="form-control"
+                           id="phoneNumber"
+                           placeholder="Phone Number..."
+                           v-model="inputData.phoneNumber">
                     <div class="invalid-feedback">
                         Please enter a valid password.
                     </div>
@@ -45,14 +67,19 @@
 
                 <div class="mb-3">
                     <label for="studentNumber">Student Number(if amirkabiri otherwise ignore)</label>
-                    <input type="text" class="form-control" id="studentNumber" placeholder="Amirkabir Student Number..." v-model="inputData.studentNumber">
+                    <input type="text"
+                           class="form-control"
+                           id="studentNumber"
+                           placeholder="Amirkabir Student Number..."
+                           v-model="inputData.studentNumber">
                     <div class="invalid-feedback">
                         Please enter a valid studentNumber.
                     </div>
                 </div>
 
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Create New User</button>
+                <button class="btn btn-primary btn-lg btn-block"
+                        type="submit">Create New User</button>
             </form>
         </div>
     </div>
