@@ -69,23 +69,23 @@
             <button class="btn btn-secondary" @click="printInput()">View Input</button>
 
             <h4>List of Participants:</h4>
-            <download-excel
+            <vue-csv-downloader
                 class="btn btn-md btn-info mt-3 mb-3"
                 :data="participants"
                 :fields="exportFieldsAll"
-                :name="workshop.title + '-FULLDATA-' + (new Date()) + '.xls'"
+                :download-name="workshop.title + '-FULLDATA-' + (new Date()) + '.csv'"
                 >
                 Download this list as excel with phone number
-            </download-excel>
+            </vue-csv-downloader>
             <br>
-            <download-excel
+            <vue-csv-downloader
                 class="btn btn-md btn-info mt-3 mb-3"
                 :data="participants"
                 :fields="exportFieldsEssentials"
-                :name="workshop.title + '-ESSENTIALS-' + (new Date()) + '.xls'"
+                :download-name="workshop.title + '-ESSENTIALS-' + (new Date()) + '.xls'"
                 >
                 Download this list as excel essentials only
-            </download-excel>
+            </vue-csv-downloader>
 
 
             <table class="table table-sm table-hover table-border">
@@ -146,11 +146,13 @@
     import axios from 'axios'
     import jalali from 'jalali-moment'
     import VuePersianDateTimePicket from "vue-persian-datetime-picker";
+    import VueCsvDownloader from 'vue-csv-downloader';
 
     export default {
         name: "WorkshopProfile",
         components: {
             datePicker: VuePersianDateTimePicket,
+            VueCsvDownloader
         },
         data() {
             return {
@@ -164,19 +166,19 @@
                 availableTeachers: [],
                 availableImageFields: [],
                 files: [],
-                exportFieldsAll : {
-                    'First Name': 'firstName',
-                    'Last Name': 'lastName',
-                    'Phone Number': 'phoneNumber',
-                    'Student Number' : 'studentNumber',
-                    'Email' : "email"
-                },
-                exportFieldsEssentials : {
-                    'First Name': 'firstName',
-                    'Last Name': 'lastName',
-                    'Student Number' : 'studentNumber',
-                    'Email' : "email"
-                }
+                exportFieldsAll : [
+                    'firstName',
+                    'lastName',
+                    'phoneNumber',
+                    'studentNumber',
+                    'email'
+                ],
+                exportFieldsEssentials : [
+                  'firstName',
+                  'lastName',
+                  'studentNumber',
+                  'email'
+                ]
 
             }
         },
@@ -292,7 +294,6 @@
                         Authorization: "Bearer " + this.$store.getters.token,
                     }
                 }).then(response => {
-                    console.log(response.data);
                     this.workshop = response.data.workshop;
                     this.participants = response.data.participants;
                     this.teachers = response.data.teachers;
@@ -310,7 +311,6 @@
                         "Content-Type": "application/json"
                     }
                 }).then(response => {
-                    console.log(response);
                     this.users = response.data;
                 }).catch(error => {
                     console.log(error);
@@ -393,7 +393,7 @@
 
             teacherIsInWorkshopTeachers(teacherId) {
                 for (let i = 0; i < this.workshop.teachers.length; i++) {
-                    if (this.workshop.teachers[i]._id == teacherId)
+                    if (this.workshop.teachers[i]._id === teacherId)
                         return true
                 }
                 return false;

@@ -40,7 +40,7 @@ export default new Vuex.Store({
       return state.token;
     },
     isLoggedIn : state => {
-      return state.token != '';
+      return state.token !== '';
     },
     adminApi : state => {
       return state.adminApi;

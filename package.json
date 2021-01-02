@@ -20,6 +20,7 @@
   "devDependencies": {
     "@vue/cli-plugin-pwa": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
+    "vue-csv-downloader": "^1.0.3",
     "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [
