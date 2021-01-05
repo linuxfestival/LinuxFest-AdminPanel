@@ -29,7 +29,9 @@
                 
                 <label for="teachers">Select Teachers(Required , Can Select Multiple Teachers):</label>
                 <select id="teachers" class="custom-select" multiple v-model="inputWorkshop.teachers">
-                    <option v-for="teacher in availableTeachers" :key="availableTeachers.indexOf(teacher)" :value="teacher._id">{{teacher.fullName}}</option>
+                    <option v-for="teacher in availableTeachers"
+                            :key="availableTeachers.indexOf(teacher)"
+                            :value="teacher._id">{{teacher.fullName}}</option>
                 </select>
 
                 <div class="row" v-for="inputTime in inputWorkshop.times">

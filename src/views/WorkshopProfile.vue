@@ -51,14 +51,19 @@
                     </div>
                 </div>
                 <hr class="mb-4">
-
-                <label for="teachers">Select Teachers(Required , Can Select Multiple Teachers):</label>
-                <select id="teachers" class="custom-select" multiple>
-                    <option v-for="teacher in teachers" :key="teachers.indexOf(teacher)" :value="teacher.id">
-                        {{teacher.fullName}}
-                    </option>
-                </select>
-
+              <h4>current teachers</h4>
+              <ul>
+                <li v-for="teacher in teachers">{{teacher.fullName}}</li>
+              </ul>
+              <label for="teachers">Select Teachers(Required , Can Select Multiple Teachers, you should select previous teachers if necessary):</label>
+               <select id="teachers" class="custom-select" multiple
+                       v-model="selectedTeachers" size=10>
+                <option v-for="teacher in availableTeachers"
+                        :value="teacher._id"
+                        :key=availableTeachers.indexOf(teacher)>
+                  {{teacher.fullName}}
+                </option>
+              </select>
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Update Current Workshop</button>
             </form>
 
@@ -115,7 +120,7 @@
             <hr>
 
             <form @submit.prevent="addSelectedUsersToWorkshop()">
-                <label for="users">Select Users to Add(Required , Can Select Multiple Teachers):</label>
+                <label for="users">Select Users to Add(Required , Can Select Multiple Users):</label>
                 <select id="users" class="custom-select" multiple v-model="selectedUsersToAdd" size=10>
                     <option v-for="user in availableUsersToAdd" :key="availableUsersToAdd.indexOf(user)"
                             :value="user._id">{{user.firstName}} {{user.lastName}} | {{user.email}}
@@ -160,8 +165,9 @@
                 participants: [],
                 currentTeachers: [],
                 allTeachers: [],
-                selectedTeachers: [],
+                selectedTeachers:[],
                 users: [],
+                teachers:[],
                 selectedUsersToAdd: [],
                 availableTeachers: [],
                 availableImageFields: [],
@@ -269,8 +275,7 @@
                 for (let i = 0; i < this.workshop.times.length; i++) {
                     this.workshop.times[i]._id = this.$route.params.id;
                 }
-
-                console.log("update payload", this.workshop);
+              this.workshop.teachers = this.backendizeTeachersStructure(this.selectedTeachers);
                 axios({
                     url: this.$store.getters.workshopsApi + "manage/" + this.$route.params.id,
                     method: "patch",
@@ -285,7 +290,13 @@
                     console.log(error.response);
                 })
             },
-
+            backendizeTeachersStructure() {
+            let teachers = [];
+            for(let i = 0; i < this.selectedTeachers.length ; i++) {
+              teachers.push({"id" : this.selectedTeachers[i]})
+            }
+            return teachers;
+          },
             getCurrentWorkshop() {
                 axios({
                     url: this.$store.getters.workshopsApi + "manage/" + this.$route.params.id,
@@ -297,6 +308,7 @@
                     this.workshop = response.data.workshop;
                     this.participants = response.data.participants;
                     this.teachers = response.data.teachers;
+                    console.log(response.data.teachers)
                 }).catch(error => {
                     console.log(error.response);
                 })
@@ -367,7 +379,7 @@
 
             isUserIdInParticipants(userIdToSearch) {
                 for (let i = 0; i < this.participants.length; i++) {
-                    if (this.participants[i]._id == userIdToSearch) {
+                    if (this.participants[i]._id === userIdToSearch) {
                         return true;
                     }
                 }
@@ -383,9 +395,10 @@
                         "Content-Type": "application/json"
                     }
                 }).then(response => {
-                    console.log(response);
-                    this.availableTeachers = response.data;
-                    console.log('available teachers ', this.availableTeachers);
+                    // this.availableTeachers = response.data;
+                  for(let i = 0 ; i < response.data.length ; i++) {
+                    this.availableTeachers.push(response.data[i].teacher);
+                  }
                 }).catch(error => {
                     console.log(error.response);
                 })
