@@ -80,7 +80,7 @@
                 :fields="exportFieldsAll"
                 :download-name="workshop.title + '-FULLDATA-' + (new Date()) + '.csv'"
                 >
-                Download this list as excel with phone number
+                Download this list as csv with phone number
             </vue-csv-downloader>
             <br>
             <vue-csv-downloader
@@ -89,7 +89,7 @@
                 :fields="exportFieldsEssentials"
                 :download-name="workshop.title + '-ESSENTIALS-' + (new Date()) + '.xls'"
                 >
-                Download this list as excel essentials only
+                Download this list as csv essentials only
             </vue-csv-downloader>
 
 

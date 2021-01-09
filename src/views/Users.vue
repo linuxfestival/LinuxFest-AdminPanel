@@ -2,6 +2,16 @@
     <div>
         <h1>users ({{users.length}}) :</h1>
         <router-link to="/createuser" class="btn btn-success btn-md" >(+)Add New User</router-link>
+      <div class="downloadBtn">
+      <vue-csv-downloader
+          class="btn btn-md btn-info mt-3 mb-3"
+          :data="users"
+          :fields="exportFieldsAll"
+          :download-name="'allUsers' + (new Date()) + '.csv'"
+      >
+        Download this list as csv
+      </vue-csv-downloader>
+      </div>
         <div class="table-responsive mt-3">
             <table class="table table-sm table-hover isansFont">
             <thead class="thead-light">
@@ -44,13 +54,25 @@
 <script>
     import axios from "axios"
     import jalali from "jalali-moment"
+    import VueCsvDownloader from 'vue-csv-downloader';
+
     export default {
         name: "Users",
         data() {
             return {
                 users : [],
+              exportFieldsAll : [
+                'firstName',
+                'lastName',
+                'phoneNumber',
+                'studentNumber',
+                'email'
+              ]
             }
         },
+      components:{
+        VueCsvDownloader
+      },
         methods : {
             getJalali: function(date){
                 return jalali(date);
@@ -110,5 +132,9 @@
         display:flex;
         align-items:center;
         justify-content:center;
+    }
+    .downloadBtn{
+      display: flex;
+      justify-content: center;
     }
 </style>
