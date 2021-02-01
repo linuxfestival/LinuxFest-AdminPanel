@@ -104,7 +104,6 @@
         },
         methods : {
             createNewUser: function() {
-                console.log('input data ', this.inputData);
                 axios({
                     url: this.$store.getters.usersApi + 'ac',
                     method : 'POST',
@@ -125,12 +124,10 @@
                     console.log(response);
                     this.$router.push('/users');
                 }).catch(error => {
-                    console.log(error);
-                    if(error.response)
-                        console.log(error.response);
+                    console.log(error.response);
                     this.$notify({
                         group : "main",
-                        text : "Error creating user.<br>Check Console for error message",
+                        text : "Error creating user.<br>"+error.response.data.message,
                         title : "Error.",
                         type : "error",
                         position: "top center",
@@ -139,9 +136,6 @@
                 })
             }
         },
-        mounted(){
-            console.log('user crate mounted');
-        }
     }
 </script>
 

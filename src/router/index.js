@@ -12,6 +12,7 @@ import Teachers from "@/views/Teachers";
 import TeacherCreate from "@/views/TeacherCreate"
 import TeacherProfile from "@/views/TeacherProfile"
 import WorkshopProfile from "@/views/WorkshopProfile";
+import Email from "@/views/Email";
 
 Vue.use(VueRouter);
 
@@ -67,6 +68,11 @@ const routes = [
         path : '/teachers/:id',
         name : "teacherProfile",
         component : TeacherProfile
+    },
+    {
+        path: '/email',
+        name: "Email",
+        component: Email
     }
 ];
 
@@ -76,7 +82,7 @@ const router = new VueRouter({
     routes
 });
 
-const requiredAuth = ['/home', '/users' , '/workshops' , '/workshops/:id' , '/users/:id', '/createuser' , '/createworkshop' , '/teachers', '/teachers/:id' , '/createteacher'];
+const requiredAuth = ['/home', '/users' , '/workshops' , '/workshops/:id' , '/users/:id', '/createuser' , '/createworkshop' , '/teachers', '/teachers/:id' , '/createteacher', '/email'];
 const requiredNotAuth = ['/'];
 
 router.beforeEach((to,from,next) => {

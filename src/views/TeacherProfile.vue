@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="fullName">Full Name(Persian Letter only)</label>   
-                        <input type="text" class="form-control" placeholder="Full Name..." v-model="teacher.fullName">
+                        <input id = "fullName" type="text" class="form-control" placeholder="Full Name..." v-model="teacher.fullName">
                     </div>
                 </div>
 
@@ -68,8 +68,25 @@
                 ).then(response => {
                     console.log(response);
                     console.log('SUCCESS!!');
+                  this.$notify({
+                    group : "main",
+                    text : "SUCCESS!!",
+                    title : "Success",
+                    type : "success",
+                    position: "top center",
+                    duration: 3000,
+                  })
                 }).catch(error => {
                     console.log(error.response);
+
+                  this.$notify({
+                    group : "main",
+                    text : "ّFAILD",
+                    title : "Error.",
+                    type : "error",
+                    position: "top center",
+                    duration: 5000,
+                  })
                     console.log('FAILURE!!');
                 });
             },
@@ -116,9 +133,25 @@
                     }
                 }).then(response => {
                     console.log(response);
+                  this.$notify({
+                    group : "main",
+                    text : "Teacher updated successfully",
+                    title : "Success",
+                    type : "success",
+                    position: "top center",
+                    duration: 3000,
+                  })
                     this.getTeacherWithId();
                 }).catch(error => {
                     console.log(error.response);
+                  this.$notify({
+                    group : "main",
+                    text : "Error updating user.<br>"+error.response.data.error,
+                    title : "Error.",
+                    type : "error",
+                    position: "top center",
+                    duration: 5000,
+                  })
                 })
             }
         },

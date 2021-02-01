@@ -20,7 +20,7 @@
                     <td>{{teachers.indexOf(teacher) + 1}}</td>
                     <td class="iransans">{{teacher.teacher.fullName}}</td>
                     <td class="iransans">{{teacher.teacher.description}}</td>
-                    <td><img class="avatar-image" :src="'http://skillcenter.aut.ac.ir/linuxfestapi' + teacher.teacher.picUrl" :alt="teacher.teacher.fullName + 's image. bad url'"></td>
+                    <td><img class="avatar-image" :src="teachersURL+ teacher.teacher.picUrl" :alt="teacher.teacher.fullName + 's image. bad url'"></td>
                     <td class="iransans">{{getJalali(teacher.teacher.createdAt).locale('fa').format('YYYY/M/D HH:mm')}}</td>
                     <td class="iransans">{{getJalali(teacher.teacher.updatedAt).locale('fa').format('YYYY/M/D HH:mm')}}</td>
                     <td class="d-flex align-items-center justify-content-center">
@@ -42,7 +42,8 @@ export default {
     name : "Teachers",
     data() {
         return {
-            teachers : []
+            teachers : [],
+            teachersURL: this.$store.getters.teachersApi
         }
     },
     methods : {
@@ -60,6 +61,7 @@ export default {
                 }
             }).then(response => {
                 console.log(response);
+                console.log(response.data)
                 this.teachers = response.data;
             }).catch(error => {
                 console.log(error.response);
@@ -76,9 +78,25 @@ export default {
                     }
                 }).then(response => {
                     console.log(response);
+                  this.$notify({
+                    group : "main",
+                    text : "WorkShop deleted successfully,please refresh the page to update it",
+                    title : "Success",
+                    type : "success",
+                    position: "top center",
+                    duration: 3000,
+                  })
                     this.getTeachers();
                 }).catch(error => {
                     console.log(error.response);
+                  this.$notify({
+                    group : "main",
+                    text : "Error updating user.<br>"+error.response.data.message,
+                    title : "Error.",
+                    type : "error",
+                    position: "top center",
+                    duration: 5000,
+                  })
                 })
             }
         }

@@ -7,15 +7,15 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="firstName">First Name(Persian Letter only)</label>   
-                        <input type="text" class="form-control" placeholder="First Name..." v-model="user.firstName">
+                        <input  id="firstName" type="text" class="form-control" placeholder="First Name..." v-model="user.firstName">
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="firstName">Last Name(Persian Letter only)</label>   
-                        <input type="text" class="form-control" placeholder="Last Name..." v-model="user.lastName">
+                        <label for="lastName">Last Name(Persian Letter only)</label>
+                        <input id="lastName" type="text" class="form-control" placeholder="Last Name..." v-model="user.lastName">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="age">Age(Number only)</label>   
-                        <input type="number" class="form-control" placeholder="Age..." v-model="user.age">
+                        <input id="age" type="number" class="form-control" placeholder="Age..." v-model="user.age">
                     </div>
                 </div>
 
@@ -46,7 +46,8 @@
                 </div>
 
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Update User</button>
+                <button class="btn btn-primary btn-lg btn-block"
+                        type="submit">Update User</button>
             </form>
         </div>
 
@@ -60,7 +61,8 @@
         name: "UsersProfile",
         data() {
             return {
-                user : {}
+                user : {},
+                btnText:"Update User"
             }
         },
         methods : {
@@ -78,8 +80,6 @@
                 }
             }).then(response => {
                 console.log(response);
-                // this.user = response.data;
-                // this.getAllUsers();
             }).catch(error => {
                 console.log(error);
                 console.log("user obj to send " , this.user);
@@ -100,7 +100,7 @@
                 }).then(response => {
                     console.log(response);
                     for(let i = 0 ; i < response.data.length ;i++){
-                        if(response.data[i]._id == this.$route.params.id){
+                        if(response.data[i]._id === this.$route.params.id){
                             this.user = response.data[i];
                             break;
                         }
@@ -115,6 +115,7 @@
             },
             updateUser() {
                 console.log("update user with id ", this.$route.params.id);
+                this.btnText = "loading ..."
                 let updatedUser = {
                     age : this.user.age,
                     email : this.user.email,
@@ -123,9 +124,6 @@
                     phoneNumber : this.user.phoneNumber,
                     studentNumber : this.user.studentNumber
                 }
-
-                console.log("user obj to send " , this.user);
-
                 axios({
                     url : this.$store.getters.usersApi + this.$route.params.id,
                     method : "PATCH",
@@ -135,10 +133,27 @@
                         "Content-Type" : "application/json"
                     }
                 }).then(response => {
+                    console.log("done")
                     console.log(response);
-                    this.getAllUsers();
+                    this.btnText = "Update User"
+                  this.$notify({
+                    group : "main",
+                    text : "User updated successfully",
+                    title : "Success",
+                    type : "success",
+                    position: "top center",
+                    duration: 3000,
+                  })
                 }).catch(error => {
-                    console.log(error.response);
+                    console.log(error);
+                  this.$notify({
+                    group : "main",
+                    text : "Error updating user.<br>"+error.response.data.message,
+                    title : "Error.",
+                    type : "error",
+                    position: "top center",
+                    duration: 5000,
+                  })
                 })
             }
         },

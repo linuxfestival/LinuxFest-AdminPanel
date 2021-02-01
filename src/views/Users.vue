@@ -93,9 +93,25 @@
                         }
                     }).then(response => {
                         console.log("delete user response",response);
+                      this.$notify({
+                        group : "main",
+                        text : "User deleted successfully,please refresh the page to update it",
+                        title : "Success",
+                        type : "success",
+                        position: "top center",
+                        duration: 3000,
+                      })
                         this.getListOfUsers();
                     }).catch(error => {
                         console.log(error.response);
+                      this.$notify({
+                        group : "main",
+                        text : "Error creating user.please refresh the page to see whether updated or not",
+                        title : "Error.",
+                        type : "error",
+                        position: "top center",
+                        duration: 8000,
+                      })
                     })
                 }
             },

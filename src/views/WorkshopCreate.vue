@@ -56,15 +56,14 @@
                                 input-class="form-control"/>
                     </div>
                 </div>
-
+              <br/>
+              <br/>
+              <button class="btn btn-info" @click="addTime()">Add time</button>
+              <button class="btn btn-warning" @click="removeTime()">Remove time</button>
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block">Create New Workshop</button>
             </form>
-
-            <hr>
-            <button class="btn btn-info" @click="addTime()">Add time</button>
-            <button class="btn btn-warning" @click="removeTime()">Remove time</button>
-            <hr>
+          <hr/>
             <button class="btn btn-secondary" @click="printInput()">View Input</button>
         </div>
     </div>
@@ -124,6 +123,7 @@ export default {
 
         createNewWorkshop: function() {
             //create new workshop
+            this.isCreated = "wait"
             console.log("Create new workshop");
             this.inputWorkshop.teachers = this.backendizeTeachersStructure(this.inputWorkshop.teachers);
             console.log(this.inputWorkshop); 
@@ -138,8 +138,25 @@ export default {
                 }
             }).then(response => {
                 console.log(response);
+              this.$router.push('/workshops');
+              this.$notify({
+                group : "main",
+                text : "workshop created successfully",
+                title : "Success",
+                type : "success",
+                position: "top center",
+                duration: 3000,
+              })
             }).catch(error => {
                 console.log(error.response);
+              this.$notify({
+                group : "main",
+                text : "Error creating workshop.<br>" + error.response.data.error,
+                title : "Error.",
+                type : "error",
+                position: "top center",
+                duration: 5000,
+              })
             })
         },
         getAvailableTeachers() {

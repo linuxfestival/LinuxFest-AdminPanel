@@ -23,16 +23,6 @@
 
                         </textarea>
                 </div>
-            
-<!--                <div class="mb-3">-->
-<!--                        <label for="imagePath">Image Path (Optional - Set Empty until Fixed):</label>-->
-<!--                        <input type="url"-->
-<!--                               class="form-control"-->
-<!--                               id="imagePath" placeholder="ImagePath..."-->
-<!--                               v-model="newTeacher.imagePath">-->
-<!--                </div>-->
-
-            
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block"
                         type="submit">Create New Teacher</button>
@@ -68,8 +58,25 @@ export default {
                 }   
             }).then(response => {
                 console.log(response);
+              this.$notify({
+                group : "main",
+                text : "Teacher created successfully",
+                title : "Success",
+                type : "success",
+                position: "top center",
+                duration: 3000,
+              })
+              this.$router.push('/teachers');
             }).catch(error => {
                 console.log(error.response)
+                this.$notify({
+                group : "main",
+                text : "Error creating user.<br>"+error.response.data.error,
+                title : "Error.",
+                type : "error",
+                position: "top center",
+                duration: 5000,
+              })
             }).finally(() => {
                 
             })

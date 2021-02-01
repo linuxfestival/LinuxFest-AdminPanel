@@ -6,10 +6,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token : localStorage.getItem('token') || '',
-    adminApi : 'http://skillcenter.aut.ac.ir/linuxfestapi/almightyone/',
-    usersApi : 'http://skillcenter.aut.ac.ir/linuxfestapi/users/',
-    workshopsApi : "http://skillcenter.aut.ac.ir/linuxfestapi/workshops/",
-    teachersApi : "http://skillcenter.aut.ac.ir/linuxfestapi/teachers/",
+    adminApi : 'http://linux.ce.aut.ac.ir/almightyone/',
+    // adminApi : 'https://heartyhonoreddisk.ahmadforoughi.repl.co/almightyone/',
+    usersApi : 'http://linux.ce.aut.ac.ir/users/',
+    // usersApi : 'https://HeartyHonoredDisk.ahmadforoughi.repl.co/users/',
+    workshopsApi : "http://linux.ce.aut.ac.ir/workshops/",
+    // workshopsApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/workshops/",
+    teachersApi : "http://linux.ce.aut.ac.ir/teachers/",
+    // teachersApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/teachers/",
+    mailApi: "http://linux.ce.aut.ac.ir/almightyone/mailit",
     loggedInAdmin : {},
   },
 
@@ -40,6 +45,7 @@ export default new Vuex.Store({
       return state.token;
     },
     isLoggedIn : state => {
+      // return true;
       return state.token !== '';
     },
     adminApi : state => {
@@ -56,6 +62,9 @@ export default new Vuex.Store({
     },
     loggedInAdmin : state => {
       return state.loggedInAdmin
-    }
+    },
+    emailAPi:state =>{
+      return state.mailApi
+}
   }
 })
