@@ -39,7 +39,7 @@
                             "Content-Type" : "application/json"
                         }
                     }).then(response => {
-                        console.log(response);
+                        // console.log(response);
                         this.$store.dispatch('login',response.data.token,response.data.admin);
                         this.$router.push('/home');
                     }).catch(error => {

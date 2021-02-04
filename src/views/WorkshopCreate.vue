@@ -81,10 +81,10 @@ export default {
     data() {
         return {
             inputWorkshop : {
-                title : "Ghamsar OS",
+                title : "workshop's title",
                 capacity : "20",
                 price : "100000",
-                description: "Ghamsar os is leading unix based systems.",
+                description: "Workshop's description",
                 teachers : [],
                 startTime : "",
                 endTime : "",

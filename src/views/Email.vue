@@ -28,6 +28,19 @@
         </div>
         <button class="btn btn-md btn-success mt-3 col-11">Send email to selected workshop's users</button>
         <button class="btn btn-md btn-success mt-3 col-11" @click="sendEmailAllUsers">Send email to all users</button>
+        <label for="users"><b>select workshop's users</b></label>
+      </form>
+      <form>
+        <label for="selectedUsers"><b>select users</b></label>
+        <select id="selectedUsers" class="custom-select" multiple
+                v-model="selectedUsers" size=10>
+          <option v-for="user in users"
+                  :value="user"
+                  :key="users.indexOf(user)">
+            {{ user.firstName +" "+ user.lastName }}
+          </option>
+        </select>
+        <button class="btn btn-md btn-success mt-3 col-11" @click.prevent="sendEmailSelectedUser">Send email to selected users</button>
       </form>
     </div>
   </div>
@@ -45,6 +58,7 @@ export default {
       workshops: [],
       message:"",
       selectedWorkshops: [],
+      selectedUsers:[],
       users: [],
       emailData:{
         mails:[],
@@ -54,6 +68,46 @@ export default {
     }
   },
   methods: {
+    sendEmailSelectedUser:function (){
+      let emails = []
+        for (let u of this.selectedUsers) {
+          emails.push(u.email);
+      }
+      this.emailData.mails = emails;
+      console.log(this.emailData);
+      axios({
+        url : this.$store.getters.emailAPi,
+        method : "POST",
+        data :  this.emailData,
+        headers : {
+          Authorization : "Bearer " + this.$store.getters.token,
+          "Content-Type" : "application/json"
+        }
+      }).then(response => {
+        console.log(response);
+        this.$notify({
+          group : "main",
+          text : "email sent successfully",
+          title : "Success",
+          type : "success",
+          position: "top center",
+          duration: 3000,
+        })
+        this.emailData.html= "";
+        this.emailData.title="";
+        this.emailData.mails = []
+      }).catch(error => {
+        console.log(error.response);
+        this.$notify({
+          group : "main",
+          text : "Error creating user.<br>Check Console for error message",
+          title : "Error.",
+          type : "error",
+          position: "top center",
+          duration: 5000,
+        })
+      })
+    },
     sendEmail: function () {
       let emails = []
       for (let workshop of this.selectedWorkshops) {
