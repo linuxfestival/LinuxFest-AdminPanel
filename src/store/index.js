@@ -6,15 +6,16 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token : localStorage.getItem('token') || '',
-    // adminApi : 'http://linux.ce.aut.ac.ir/almightyone/',
-    adminApi : 'https://heartyhonoreddisk.ahmadforoughi.repl.co/almightyone/',
-    // usersApi : 'http://linux.ce.aut.ac.ir/users/',
-    usersApi : 'https://HeartyHonoredDisk.ahmadforoughi.repl.co/users/',
-    // workshopsApi : "http://linux.ce.aut.ac.ir/workshops/",
-    workshopsApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/workshops/",
-    // teachersApi : "http://linux.ce.aut.ac.ir/teachers/",
-    teachersApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/teachers/",
+    adminApi : 'http://linux.ce.aut.ac.ir/almightyone/',
+    // adminApi : 'https://heartyhonoreddisk.ahmadforoughi.repl.co/almightyone/',
+    usersApi : 'http://linux.ce.aut.ac.ir/users/',
+    // usersApi : 'https://HeartyHonoredDisk.ahmadforoughi.repl.co/users/',
+    workshopsApi : "http://linux.ce.aut.ac.ir/workshops/",
+    // workshopsApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/workshops/",
+    teachersApi : "http://linux.ce.aut.ac.ir/teachers/",
+    // teachersApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/teachers/",
     mailApi: "http://linux.ce.aut.ac.ir/almightyone/mailit",
+    companyAPi:"http://linux.ce.aut.ac.ir/companies/",
     loggedInAdmin : {},
   },
 
@@ -65,6 +66,9 @@ export default new Vuex.Store({
     },
     emailAPi:state =>{
       return state.mailApi
-}
+},
+    companiesAPI:state =>{
+      return state.companyAPi
+    }
   }
 })

@@ -95,7 +95,7 @@
                         console.log("delete user response",response);
                       this.$notify({
                         group : "main",
-                        text : "User deleted successfully,please refresh the page to update it",
+                        text : "User deleted successfully",
                         title : "Success",
                         type : "success",
                         position: "top center",
@@ -106,8 +106,8 @@
                         console.log(error.response);
                       this.$notify({
                         group : "main",
-                        text : "Error creating user.please refresh the page to see whether updated or not",
                         title : "Error.",
+                        text : "please refresh the page and try again",
                         type : "error",
                         position: "top center",
                         duration: 8000,

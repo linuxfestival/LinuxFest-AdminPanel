@@ -26,8 +26,8 @@
           </label>
           <vue-editor v-model="emailData.html"></vue-editor>
         </div>
-        <button class="btn btn-md btn-success mt-3 col-11">Send email to selected workshop's users</button>
-        <button class="btn btn-md btn-success mt-3 col-11" @click="sendEmailAllUsers">Send email to all users</button>
+        <button class="btn btn-md btn-success mt-3 col-11">{{btn1}}</button>
+        <button class="btn btn-md btn-success mt-3 col-11" @click="sendEmailAllUsers">{{btn2}}</button>
         <label for="users"><b>select workshop's users</b></label>
       </form>
       <form>
@@ -40,7 +40,7 @@
             {{ user.firstName +" "+ user.lastName }}
           </option>
         </select>
-        <button class="btn btn-md btn-success mt-3 col-11" @click.prevent="sendEmailSelectedUser">Send email to selected users</button>
+        <button class="btn btn-md btn-success mt-3 col-11" @click.prevent="sendEmailSelectedUser">{{btn3}}</button>
       </form>
     </div>
   </div>
@@ -64,17 +64,20 @@ export default {
         mails:[],
         title:"",
         html:""
-      }
+      },
+      btn1:'Send email to selected workshop\'s users',
+      btn2:'Send email to all users',
+      btn3:'Send email to selected users'
     }
   },
   methods: {
     sendEmailSelectedUser:function (){
+      this.btn3 = "loading,please wait"
       let emails = []
         for (let u of this.selectedUsers) {
           emails.push(u.email);
       }
       this.emailData.mails = emails;
-      console.log(this.emailData);
       axios({
         url : this.$store.getters.emailAPi,
         method : "POST",
@@ -85,6 +88,7 @@ export default {
         }
       }).then(response => {
         console.log(response);
+        this.btn3 = "Send email to selected users"
         this.$notify({
           group : "main",
           text : "email sent successfully",
@@ -109,6 +113,7 @@ export default {
       })
     },
     sendEmail: function () {
+      this.btn1="loading, please wait"
       let emails = []
       for (let workshop of this.selectedWorkshops) {
         for (let u of workshop.participants) {
@@ -126,6 +131,7 @@ export default {
           "Content-Type" : "application/json"
         }
       }).then(response => {
+        this.btn1 = "Send email to selected workshop\'s users"
         console.log(response);
         this.$notify({
           group : "main",
@@ -151,6 +157,7 @@ export default {
       })
     },
     sendEmailAllUsers() {
+      this.btn2 = "loading,please wait"
       console.log("start emailing to all users")
       let emails = []
       for (let u of this.users) {
@@ -167,6 +174,7 @@ export default {
           "Content-Type" : "application/json"
         }
       }).then(response => {
+        this.btn2 = "send email to all users"
         console.log(response);
         this.$notify({
           group : "main",

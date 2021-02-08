@@ -4,7 +4,7 @@
 
         <div class="col-md-8 order-md-1">
             <div class="col-md-8 order-md-1">
-            <form class="needs-validation" @submit.prevent="updateTeacher()" v-if="teacher != undefined">
+            <form class="needs-validation" @submit.prevent="updateTeacher()" v-if="teacher !== undefined">
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="fullName">Full Name(Persian Letter only)</label>   
@@ -22,12 +22,11 @@
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Update Teacher</button>
             </form>
-
                 <br>
                 <br>
             <form @submit.prevent="submitFile()">
                 <input class="form-control" ref="file" type="file" @change="handleFileUpload()"/>
-                <button class="btn btn-success ">Upload Image</button>
+                <button class="btn btn-success ">{{uploadText}}</button>
             </form>
             </div>
         </div>
@@ -44,7 +43,8 @@
             return {
                 teacher : {},
                 workshops : [],
-                file : ''
+                file : '',
+                uploadText:"upload image"
             }
         },
         methods : {
@@ -52,11 +52,9 @@
                 return jalali(date);
             },
             submitFile() {
+              this.uploadText = "laoding ..."
                 let formData = new FormData();
                 formData.append('mainPic', this.file);
-                console.log(this.file);
-                console.log(formData);
-
                 axios.post( this.$store.getters.teachersApi + 'pic/' + this.teacher._id,
                     formData,
                     {
@@ -68,6 +66,7 @@
                 ).then(response => {
                     console.log(response);
                     console.log('SUCCESS!!');
+                    this.uploadText = "upload image"
                   this.$notify({
                     group : "main",
                     text : "SUCCESS!!",
@@ -78,7 +77,7 @@
                   })
                 }).catch(error => {
                     console.log(error.response);
-
+                  this.uploadText = "upload image"
                   this.$notify({
                     group : "main",
                     text : "ّFAILD",
@@ -92,6 +91,7 @@
             },
             handleFileUpload() {
                 this.file = this.$refs.file.files[0];
+
             },
             getTeacherWithId(){
                 console.log("Getting teacher with id " + this.$route.params.id);

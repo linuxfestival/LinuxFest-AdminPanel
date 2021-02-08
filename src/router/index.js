@@ -13,6 +13,9 @@ import TeacherCreate from "@/views/TeacherCreate"
 import TeacherProfile from "@/views/TeacherProfile"
 import WorkshopProfile from "@/views/WorkshopProfile";
 import Email from "@/views/Email";
+import CareersCreate from "../views/careers/CareersCreate";
+import AllCompanies from "../views/careers/AllCompanies";
+import CompanyProfile from "../views/careers/CompanyProfile";
 
 Vue.use(VueRouter);
 
@@ -73,6 +76,21 @@ const routes = [
         path: '/email',
         name: "Email",
         component: Email
+    },
+    {
+        path: '/companies',
+        name: "companies",
+        component: AllCompanies
+    },
+    {
+        path: '/careercreate',
+        name: "careerCreate",
+        component: CareersCreate
+    },
+    {
+        path: '/companies/:id',
+        name: "careerCreate",
+        component: CompanyProfile
     }
 ];
 
@@ -82,7 +100,7 @@ const router = new VueRouter({
     routes
 });
 
-const requiredAuth = ['/home', '/users' , '/workshops' , '/workshops/:id' , '/users/:id', '/createuser' , '/createworkshop' , '/teachers', '/teachers/:id' , '/createteacher', '/email'];
+const requiredAuth = ['/home', '/users' , '/workshops' , '/workshops/:id' , '/users/:id', '/createuser' , '/createworkshop' , '/teachers', '/teachers/:id' , '/createteacher', '/email','/careercreate','/companies','/companies/:id'];
 const requiredNotAuth = ['/'];
 
 router.beforeEach((to,from,next) => {

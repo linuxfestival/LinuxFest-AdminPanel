@@ -24,6 +24,7 @@
                         </textarea>
                 </div>
                 <hr class="mb-4">
+              <p>برای اضافه کردن عکس مدرس، پس از ساختن آن، از قسمت ویرایش استاد، لوگوی آن را آپلود کنید</p>
                 <button class="btn btn-primary btn-lg btn-block"
                         type="submit">Create New Teacher</button>
             </form>
@@ -41,7 +42,6 @@ export default {
             newTeacher: {
                 fullName : "",
                 description: "",
-                // imagePath : ""
             }
         }
     },

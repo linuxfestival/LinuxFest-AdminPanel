@@ -137,21 +137,22 @@
                   :value="user._id">{{ user.firstName }} {{ user.lastName }} | {{ user.email }}
           </option>
         </select>
-        <button class="btn btn-md btn-info mt-3">{{userAdding}}</button>
+        <button class="btn btn-md btn-info mt-3"
+                style="margin-bottom: 20px">{{userAdding}}</button>
       </form>
 
-      <div class="row mt-3 mb-3">
-        <div class="col-md-12">
-          <form @submit.prevent="uploadWorkshopAlbum()">
-            <input v-for="(imageField, index) in availableImageFields" :key="index" type="file" class="form-control"
-                   ref="file"
-                   @change="handleFileUpload()">
-            <button class="btn btn-info">Upload Images</button>
-          </form>
-          <button @click="addImageFieldForUpload()">Add Image Field</button>
-          <button @click="removeImageFieldForUpload()">Remove Image Field</button>
-        </div>
-      </div>
+<!--      <div class="row mt-3 mb-3">-->
+<!--        <div class="col-md-12">-->
+<!--          <form @submit.prevent="uploadWorkshopAlbum()">-->
+<!--            <input v-for="(imageField, index) in availableImageFields" :key="index" type="file" class="form-control"-->
+<!--                   ref="file"-->
+<!--                   @change="handleFileUpload()">-->
+<!--            <button class="btn btn-info">Upload Images</button>-->
+<!--          </form>-->
+<!--          <button @click="addImageFieldForUpload()">Add Image Field</button>-->
+<!--          <button @click="removeImageFieldForUpload()">Remove Image Field</button>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
