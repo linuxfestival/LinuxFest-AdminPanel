@@ -25,8 +25,8 @@
                     <td>{{workshop.workshop.capacity}}</td>
                     <td>{{workshop.workshop.price}}</td>
                     <td>{{workshop.workshop.isRegOpen}}</td>
-                    <td class="iransans">{{getJalali(workshop.workshop.times[0].startTime).utc().locale('fa').format('YYYY/M/D HH:mm')}}</td>
-                    <td class="iransans">{{getJalali(workshop.workshop.times[0].endTime).utc().locale('fa').format('YYYY/M/D HH:mm')}}</td>
+                    <td class="iransans" v-if="workshop.workshop.times[0]">{{getJalali(workshop.workshop.times[0].startTime).utc().locale('fa').format('YYYY/M/D HH:mm')}}</td>
+                    <td class="iransans" v-if="workshop.workshop.times[0]">{{getJalali(workshop.workshop.times[0].endTime).utc().locale('fa').format('YYYY/M/D HH:mm')}}</td>
                     <td class="d-flex align-items-center justify-content-center">
                         <router-link :to="'workshops/' + workshop.workshop._id" class="btn btn-just-icon btn-warning mr-1"><i class="material-icons">edit</i></router-link>
                         <button @click="deleteWorkshop(workshop.workshop._id)" class="btn btn-just-icon btn-danger"><i class="material-icons">close</i></button>

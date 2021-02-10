@@ -342,6 +342,7 @@ export default {
         this.workshop = response.data.workshop;
         this.participants = response.data.participants;
         this.teachers = response.data.teachers;
+        this.selectedTeachers = response.data.teachers;
         console.log(response.data.teachers)
       }).catch(error => {
         console.log(error.response);
