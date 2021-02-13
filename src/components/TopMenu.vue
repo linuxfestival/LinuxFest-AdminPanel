@@ -9,6 +9,7 @@
         <router-link class="nav-link navLink" to="/teachers">Teachers</router-link>
         <router-link class="nav-link navLink" to="/email">Email Panel</router-link>
         <router-link class="nav-link navLink" to="/companies">Companies</router-link>
+        <router-link class="nav-link navLink" to="/discounts">Discounts</router-link>
         <button class="nav-link btn btn-block btn-danger" @click="logout()">Logout</button>
     </nav>
     <nav class="nav flex-column align-items-start justify-content-start" v-else>

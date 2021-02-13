@@ -103,7 +103,6 @@ export default {
     },
     created() {
         this.getTeachers();
-        
     }
 }
 </script>

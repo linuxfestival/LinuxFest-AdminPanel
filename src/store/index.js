@@ -16,6 +16,7 @@ export default new Vuex.Store({
     // teachersApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/teachers/",
     mailApi: "http://linux.ce.aut.ac.ir/almightyone/mailit",
     companyAPi:"http://linux.ce.aut.ac.ir/companies/",
+    discountsAPi:"http://linux.ce.aut.ac.ir/discounts/",
     loggedInAdmin : {},
   },
 
@@ -69,6 +70,9 @@ export default new Vuex.Store({
 },
     companiesAPI:state =>{
       return state.companyAPi
+    },
+    discountApi:state => {
+      return state.discountsAPi
     }
   }
 })
