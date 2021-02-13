@@ -6,13 +6,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token : localStorage.getItem('token') || '',
-    adminApi : 'http://linux.ce.aut.ac.ir/almightyone/',
-    usersApi : 'http://linux.ce.aut.ac.ir/users/',
-    workshopsApi : "http://linux.ce.aut.ac.ir/workshops/",
-    teachersApi : "http://linux.ce.aut.ac.ir/teachers/",
-    mailApi: "http://linux.ce.aut.ac.ir/almightyone/mailit",
-    companyAPi:"http://linux.ce.aut.ac.ir/companies/",
-    discountsAPi:"http://linux.ce.aut.ac.ir/discounts/",
+    adminApi : 'http://linuxfest.ceit.aut.ac.ir/almightyone/',
+    usersApi : 'http://linuxfest.ceit.aut.ac.ir/users/',
+    workshopsApi : "http://linuxfest.ceit.aut.ac.ir/workshops/",
+    teachersApi : "http://linuxfest.ceit.aut.ac.ir/teachers/",
+    mailApi: "http://linuxfest.ceit.aut.ac.ir/almightyone/mailit",
+    companyAPi:"http://linuxfest.ceit.aut.ac.ir/companies/",
+    discountsAPi:"http://linuxfest.ceit.aut.ac.ir/discounts/",
     loggedInAdmin : {},
   },
 
