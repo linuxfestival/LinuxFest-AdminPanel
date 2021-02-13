@@ -7,13 +7,9 @@ export default new Vuex.Store({
   state: {
     token : localStorage.getItem('token') || '',
     adminApi : 'http://linux.ce.aut.ac.ir/almightyone/',
-    // adminApi : 'https://heartyhonoreddisk.ahmadforoughi.repl.co/almightyone/',
     usersApi : 'http://linux.ce.aut.ac.ir/users/',
-    // usersApi : 'https://HeartyHonoredDisk.ahmadforoughi.repl.co/users/',
     workshopsApi : "http://linux.ce.aut.ac.ir/workshops/",
-    // workshopsApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/workshops/",
     teachersApi : "http://linux.ce.aut.ac.ir/teachers/",
-    // teachersApi : "https://heartyhonoreddisk.ahmadforoughi.repl.co/teachers/",
     mailApi: "http://linux.ce.aut.ac.ir/almightyone/mailit",
     companyAPi:"http://linux.ce.aut.ac.ir/companies/",
     discountsAPi:"http://linux.ce.aut.ac.ir/discounts/",

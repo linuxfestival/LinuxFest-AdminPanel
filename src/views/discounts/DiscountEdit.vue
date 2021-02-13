@@ -17,7 +17,7 @@
                    class="form-control"
                    placeholder="code_name"
                    v-model="currentDiscounts.code">
-            <label for="count">code</label>
+            <label for="count">count</label>
             <input id="count"
                    type="text"
                    class="form-control"
