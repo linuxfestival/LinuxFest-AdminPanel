@@ -9,7 +9,7 @@
                         <input type="text" class="form-control" id="workshopTitle" placeholder="Workshop Title..." v-model="inputWorkshop.title">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="price">Price(ex : 10000 -> 10 hezar toman)</label>   
+                        <label for="price">Price(ex : 10000 -> 10 hezar Rial)</label>
                         <input type="text" id="price" class="form-control" placeholder="Price..." v-model="inputWorkshop.price">
                     </div>
                 </div>
@@ -63,6 +63,8 @@
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block">Create New Workshop</button>
             </form>
+          <hr/>
+          <h6 STYLE="text-align: right">بعد از ساختن کارگاه، از قسمت ویرایش کارگاه حتما گزینه "باز شدن کارگاه"  را انتخاب کنید وگرنه کارگاه قابلیت ثبت نام نخواهد داشت.</h6>
           <hr/>
             <button class="btn btn-secondary" @click="printInput()">View Input</button>
         </div>
