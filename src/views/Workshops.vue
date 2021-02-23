@@ -18,8 +18,8 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="workshop in workshops" class="text-center" :key="workshops.indexOf(workshop)">
-                    <td>{{workshops.indexOf(workshop) + 1}}</td>
+                <tr v-for="(workshop, index) in workshops" class="text-center" :key="index">
+                    <td>{{index + 1}}</td>
                     <td class="iransans">{{workshop.workshop.title}}</td>
                     <td class="iransans">{{workshop.workshop.description}}</td>
                     <td>{{workshop.workshop.capacity}}</td>
