@@ -90,6 +90,7 @@
           class="btn btn-md btn-info mt-3 mb-3"
           :data="participants"
           :fields="exportFieldsEssentials"
+           encoding ="'utf-8'"
           :download-name="workshop.title + '-ESSENTIALS-' + (new Date()) + '.xls'"
       >
         Download this list as csv essentials only

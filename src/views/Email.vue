@@ -24,7 +24,7 @@
           <label>
             <b>write your message here</b>
           </label>
-          <vue-editor v-model="emailData.html"></vue-editor>
+          <textarea v-model="emailData.html"></textarea>
         </div>
         <button class="btn btn-md btn-success mt-3 col-11">{{btn1}}</button>
         <button class="btn btn-md btn-success mt-3 col-11" @click="sendEmailAllUsers">{{btn2}}</button>
