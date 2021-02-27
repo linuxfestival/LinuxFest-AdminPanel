@@ -24,12 +24,14 @@
           <label>
             <b>write your message here</b>
           </label>
-          <textarea v-model="emailData.html"></textarea>
+          <vue-editor v-model="emailData.html" v-if="htmlF"></vue-editor>
+          <textarea v-model="emailData.html" v-else></textarea>
         </div>
         <button class="btn btn-md btn-success mt-3 col-11">{{btn1}}</button>
         <button class="btn btn-md btn-success mt-3 col-11" @click="sendEmailAllUsers">{{btn2}}</button>
         <label for="users"><b>select workshop's users</b></label>
       </form>
+      <button class="btn btn-info" @click="htmlF =! htmlF">{{htmlF ? emailHtml : emailTxt}}</button>
       <form>
         <label for="selectedUsers"><b>select users</b></label>
         <select id="selectedUsers" class="custom-select" multiple
@@ -65,6 +67,9 @@ export default {
         title:"",
         html:""
       },
+      emailTxt:"toggle to send email as a text",
+      emailHtml:"toggle to send email as a html",
+      htmlF:true,
       btn1:'Send email to selected workshop\'s users',
       btn2:'Send email to all users',
       btn3:'Send email to selected users'
@@ -78,39 +83,40 @@ export default {
           emails.push(u.email);
       }
       this.emailData.mails = emails;
-      axios({
-        url : this.$store.getters.emailAPi,
-        method : "POST",
-        data :  this.emailData,
-        headers : {
-          Authorization : "Bearer " + this.$store.getters.token,
-          "Content-Type" : "application/json"
-        }
-      }).then(response => {
-        console.log(response);
-        this.btn3 = "Send email to selected users"
-        this.$notify({
-          group : "main",
-          text : "email sent successfully",
-          title : "Success",
-          type : "success",
-          position: "top center",
-          duration: 3000,
-        })
-        this.emailData.html= "";
-        this.emailData.title="";
-        this.emailData.mails = []
-      }).catch(error => {
-        console.log(error.response);
-        this.$notify({
-          group : "main",
-          text : "Error creating user.<br>Check Console for error message",
-          title : "Error.",
-          type : "error",
-          position: "top center",
-          duration: 5000,
-        })
-      })
+        console.log(this.emailData)
+      // axios({
+      //   url : this.$store.getters.emailAPi,
+      //   method : "POST",
+      //   data :  this.emailData,
+      //   headers : {
+      //     Authorization : "Bearer " + this.$store.getters.token,
+      //     "Content-Type" : "application/json"
+      //   }
+      // }).then(response => {
+      //   console.log(response);
+      //   this.btn3 = "Send email to selected users"
+      //   this.$notify({
+      //     group : "main",
+      //     text : "email sent successfully",
+      //     title : "Success",
+      //     type : "success",
+      //     position: "top center",
+      //     duration: 3000,
+      //   })
+      //   this.emailData.html= "";
+      //   this.emailData.title="";
+      //   this.emailData.mails = []
+      // }).catch(error => {
+      //   console.log(error.response);
+      //   this.$notify({
+      //     group : "main",
+      //     text : "Error creating user.<br>Check Console for error message",
+      //     title : "Error.",
+      //     type : "error",
+      //     position: "top center",
+      //     duration: 5000,
+      //   })
+      // })
     },
     sendEmail: function () {
       this.btn1="loading, please wait"
