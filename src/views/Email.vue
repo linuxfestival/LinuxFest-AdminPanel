@@ -84,39 +84,39 @@ export default {
       }
       this.emailData.mails = emails;
         console.log(this.emailData)
-      // axios({
-      //   url : this.$store.getters.emailAPi,
-      //   method : "POST",
-      //   data :  this.emailData,
-      //   headers : {
-      //     Authorization : "Bearer " + this.$store.getters.token,
-      //     "Content-Type" : "application/json"
-      //   }
-      // }).then(response => {
-      //   console.log(response);
-      //   this.btn3 = "Send email to selected users"
-      //   this.$notify({
-      //     group : "main",
-      //     text : "email sent successfully",
-      //     title : "Success",
-      //     type : "success",
-      //     position: "top center",
-      //     duration: 3000,
-      //   })
-      //   this.emailData.html= "";
-      //   this.emailData.title="";
-      //   this.emailData.mails = []
-      // }).catch(error => {
-      //   console.log(error.response);
-      //   this.$notify({
-      //     group : "main",
-      //     text : "Error creating user.<br>Check Console for error message",
-      //     title : "Error.",
-      //     type : "error",
-      //     position: "top center",
-      //     duration: 5000,
-      //   })
-      // })
+      axios({
+        url : this.$store.getters.emailAPi,
+        method : "POST",
+        data :  this.emailData,
+        headers : {
+          Authorization : "Bearer " + this.$store.getters.token,
+          "Content-Type" : "application/json"
+        }
+      }).then(response => {
+        console.log(response);
+        this.btn3 = "Send email to selected users"
+        this.$notify({
+          group : "main",
+          text : "email sent successfully",
+          title : "Success",
+          type : "success",
+          position: "top center",
+          duration: 3000,
+        })
+        this.emailData.html= "";
+        this.emailData.title="";
+        this.emailData.mails = []
+      }).catch(error => {
+        console.log(error.response);
+        this.$notify({
+          group : "main",
+          text : "Error creating user.<br>Check Console for error message",
+          title : "Error.",
+          type : "error",
+          position: "top center",
+          duration: 5000,
+        })
+      })
     },
     sendEmail: function () {
       this.btn1="loading, please wait"
