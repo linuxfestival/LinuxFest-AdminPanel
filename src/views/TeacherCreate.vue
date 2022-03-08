@@ -13,6 +13,16 @@
                                v-model="newTeacher.fullName">
                     </div>
                 </div>
+                 <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="fullName_en">Full Name in English</label>   
+                        <input id="fullName_en"
+                               type="text"
+                               class="form-control"
+                               placeholder="Full Name in English..."
+                               v-model="newTeacher.fullName_en">
+                    </div>
+                </div>
 
                 <div class="mb-3">
                         <label for="description">Description (Optional):</label>   
@@ -21,6 +31,14 @@
                                   placeholder="Description..."
                                   v-model="newTeacher.description">
 
+                        </textarea>
+                </div>
+                 <div class="mb-3">
+                        <label for="description_en">Description in English (Optional):</label>   
+                        <textarea class="form-control"
+                                  id="description_en"
+                                  placeholder="Description_en..."
+                                  v-model="newTeacher.description_en">
                         </textarea>
                 </div>
                 <hr class="mb-4">
@@ -41,7 +59,9 @@ export default {
         return {
             newTeacher: {
                 fullName : "",
+                fullName_en : "",
                 description: "",
+                description_en: "",
             }
         }
     },
