@@ -55,7 +55,7 @@
               this.uploadText = "laoding ..."
                 let formData = new FormData();
                 formData.append('mainPic', this.file);
-                axios.post( this.$store.getters.teachersApi + 'pic/' + this.teacher._id,
+                axios.post( this.$store.getters.teachersApi + 'manage/pic/' + this.teacher._id,
                     formData,
                     {
                         headers: {

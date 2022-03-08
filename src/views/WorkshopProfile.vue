@@ -426,7 +426,7 @@ export default {
 
     getAvailableTeachers() {
       axios({
-        url: this.$store.getters.teachersApi,
+        url: this.$store.getters.teachersApi + "manage/",
         method: "GET",
         headers: {
           "Authorization": "Bearer " + this.$store.getters.token,

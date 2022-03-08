@@ -53,7 +53,7 @@ export default {
         getTeachers : function() {
             //getting list of teachers
             axios({
-                url : this.$store.getters.teachersApi,
+                url : this.$store.getters.teachersApi + "manage/",
                 method : "GET",
                 headers : {
                     "Authorization" : "Bearer " + this.$store.getters.token,

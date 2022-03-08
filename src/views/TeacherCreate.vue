@@ -49,7 +49,7 @@ export default {
         createNewTeacher() {
             console.log(this.inputData);
             axios({
-                url : this.$store.getters.teachersApi,
+                url : this.$store.getters.teachersApi + "manage/",
                 method : "POST",
                 data : this.newTeacher,
                 headers : {
