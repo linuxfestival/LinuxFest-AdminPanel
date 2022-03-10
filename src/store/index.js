@@ -3,16 +3,22 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+let VUE_APP_API_BASE;
+if(process.env.NODE_ENV === 'production'){
+  VUE_APP_API_BASE = `${window.location.origin}/api`
+}else {
+  VUE_APP_API_BASE = `${process.env.VUE_APP_API_BASE}`
+}
 export default new Vuex.Store({
   state: {
     token : localStorage.getItem('token') || '',
-    adminApi : `${process.env.VUE_APP_API_BASE}/almightyone/`,
-    usersApi : `${process.env.VUE_APP_API_BASE}/users/`,
-    workshopsApi : `${process.env.VUE_APP_API_BASE}/workshops/`,
-    teachersApi : `${process.env.VUE_APP_API_BASE}/teachers/`,
-    mailApi: `${process.env.VUE_APP_API_BASE}/almightyone/mailit`,
-    companyAPi:`${process.env.VUE_APP_API_BASE}/companies/`,
-    discountsAPi:`${process.env.VUE_APP_API_BASE}/discounts/`,
+    adminApi : `${VUE_APP_API_BASE}/almightyone/`,
+    usersApi : `${VUE_APP_API_BASE}/users/`,
+    workshopsApi : `${VUE_APP_API_BASE}/workshops/`,
+    teachersApi : `${VUE_APP_API_BASE}/teachers/`,
+    mailApi: `${VUE_APP_API_BASE}/almightyone/mailit`,
+    companyAPi:`${VUE_APP_API_BASE}/companies/`,
+    discountsAPi:`${VUE_APP_API_BASE}/discounts/`,
     loggedInAdmin : {},
   },
 
