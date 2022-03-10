@@ -27,6 +27,57 @@
             />
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <label for="affiliation">Affiliation (Optional)</label>
+            <input
+              id="affiliation"
+              type="text"
+              class="form-control"
+              placeholder="Affiliation"
+              v-model="newTeacher.affiliation"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <label for="affiliation_en">Affiliation in English (Optional)</label>
+            <input
+              id="affiliation_en"
+              type="text"
+              class="form-control"
+              placeholder="Affiliation in English"
+              v-model="newTeacher.affiliation_en"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <label for="field">Field (Optional)</label>
+            <input
+              id="field"
+              type="text"
+              class="form-control"
+              placeholder="field ..."
+              v-model="newTeacher.field"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <label for="field_en">Field in English (Optional)</label>
+            <input
+              id="field_en"
+              type="text"
+              class="form-control"
+              placeholder="field in English ..."
+              v-model="newTeacher.field_en"
+            />
+          </div>
+        </div>
+        
 
         <div class="mb-3">
           <label for="description">Description (Optional):</label>

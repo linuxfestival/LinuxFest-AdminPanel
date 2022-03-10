@@ -47,7 +47,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="description_en">Description (Optional):</label>
+            <label for="description_en">Description in English (Optional):</label>
             <textarea
               class="form-control"
               id="description_en"
@@ -55,6 +55,49 @@
               v-model="teacher.description_en"
             >
             </textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="affiliation">Affiliation (Optional)</label>
+            <input
+              id="affiliation"
+              type="text"
+              class="form-control"
+              placeholder="Affiliation"
+              v-model="teacher.affiliation"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="affiliation_en">Affiliation in English (Optional)</label>
+            <input
+              id="affiliation_en"
+              type="text"
+              class="form-control"
+              placeholder="Affiliation in English"
+              v-model="teacher.affiliation_en"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="field">Field (Optional)</label>
+            <input
+              id="field"
+              type="text"
+              class="form-control"
+              placeholder="field ..."
+              v-model="teacher.field"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="field_en">Field in English (Optional)</label>
+            <input
+              id="field_en"
+              type="text"
+              class="form-control"
+              placeholder="field in English ..."
+              v-model="teacher.field_en"
+            />
           </div>
 
           <hr class="mb-4" />
