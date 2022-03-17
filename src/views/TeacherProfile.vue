@@ -79,26 +79,69 @@
           </div>
 
           <div class="mb-3">
-            <label for="field">Field (Optional)</label>
+            <label for="degree">Degree (Optional)</label>
             <input
-              id="field"
+              id="degree"
               type="text"
               class="form-control"
-              placeholder="field ..."
-              v-model="teacher.field"
+              placeholder="degree ..."
+              v-model="teacher.degree"
             />
           </div>
 
           <div class="mb-3">
-            <label for="field_en">Field in English (Optional)</label>
+            <label for="degree_en">Degree in English (Optional)</label>
             <input
-              id="field_en"
+              id="degree_en"
               type="text"
               class="form-control"
-              placeholder="field in English ..."
-              v-model="teacher.field_en"
+              placeholder="degree in English ..."
+              v-model="teacher.degree_en"
             />
           </div>
+          <div class="mb-3">
+            <label for="lecture_title">Lecture_title (Optional)</label>
+            <input
+              id="lecture_title"
+              type="text"
+              class="form-control"
+              placeholder="lecture_title ..."
+              v-model="teacher.lecture_title"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="lecture_title_en">Lecture_title in English (Optional)</label>
+            <input
+              id="lecture_title_en"
+              type="text"
+              class="form-control"
+              placeholder="lecture_title in English ..."
+              v-model="teacher.lecture_title_en"
+            />
+          </div>
+
+           <div class="mb-3">
+          <label for="lecture_abstract"> Lecture abstract (Optional) </label>
+          <input
+            id="lecture_abstract"
+            type="text"
+            class="form-control"
+            placeholder="Lecture abstract ..."
+            v-model="teacher.lecture_abstract"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="lecture_abstract_en">
+            Lecture abstract in English (Optional)
+          </label>
+          <input
+            id="lecture_abstract_en"
+            type="text"
+            class="form-control"
+            placeholder="Lecture abstract in English ..."
+            v-model="teacher.lecture_abstract_en"
+          />
+        </div>
 
           <hr class="mb-4" />
           <button class="btn btn-primary btn-lg btn-block" type="submit">

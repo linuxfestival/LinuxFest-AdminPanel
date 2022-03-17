@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 let VUE_APP_API_BASE;
 if(process.env.NODE_ENV === 'production'){
-  VUE_APP_API_BASE = `${window.location.origin}/api`
+  // VUE_APP_API_BASE = `${window.location.origin}/api`
+  VUE_APP_API_BASE = `${process.env.VUE_APP_API_BASE}`
 }else {
   VUE_APP_API_BASE = `${process.env.VUE_APP_API_BASE}`
 }

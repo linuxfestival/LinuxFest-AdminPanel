@@ -41,7 +41,9 @@
         </div>
         <div class="row">
           <div class="col-md-12 mb-3">
-            <label for="affiliation_en">Affiliation in English (Optional)</label>
+            <label for="affiliation_en"
+              >Affiliation in English (Optional)</label
+            >
             <input
               id="affiliation_en"
               type="text"
@@ -54,30 +56,75 @@
 
         <div class="row">
           <div class="col-md-12 mb-3">
-            <label for="field">Field (Optional)</label>
+            <label for="degree">Degree (Optional)</label>
             <input
-              id="field"
+              id="degree"
               type="text"
               class="form-control"
-              placeholder="field ..."
-              v-model="newTeacher.field"
+              placeholder="degree ..."
+              v-model="newTeacher.degree"
             />
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-12 mb-3">
-            <label for="field_en">Field in English (Optional)</label>
+            <label for="degree_en">Degree in English (Optional)</label>
             <input
-              id="field_en"
+              id="degree_en"
               type="text"
               class="form-control"
-              placeholder="field in English ..."
-              v-model="newTeacher.field_en"
+              placeholder="degree in English ..."
+              v-model="newTeacher.degree_en"
             />
           </div>
         </div>
-        
+
+        <div class="mb-3">
+          <label for="lecture_title"> Lecture title (Optional) </label>
+          <input
+            id="lecture_title"
+            type="text"
+            class="form-control"
+            placeholder="lecture_title ..."
+            v-model="newTeacher.lecture_title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="lecture_title_en">
+            Lecture title in English (Optional)
+          </label>
+          <input
+            id="lecture_title_en"
+            type="text"
+            class="form-control"
+            placeholder="lecture_title in English ..."
+            v-model="newTeacher.lecture_title_en"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="lecture_abstract"> Lecture abstract (Optional) </label>
+          <input
+            id="lecture_abstract"
+            type="text"
+            class="form-control"
+            placeholder="Lecture abstract ..."
+            v-model="newTeacher.lecture_abstract"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="lecture_abstract_en">
+            Lecture abstract in English (Optional)
+          </label>
+          <input
+            id="lecture_abstract_en"
+            type="text"
+            class="form-control"
+            placeholder="Lecture abstract in English ..."
+            v-model="newTeacher.lecture_abstract_en"
+          />
+        </div>
 
         <div class="mb-3">
           <label for="description">Description (Optional):</label>
@@ -125,8 +172,12 @@ export default {
         description_en: "",
         affiliation: "",
         affiliation_en: "",
-        field: "",
-        field_en: "",
+        degree: "",
+        degree_en: "",
+        lecture_title: "",
+        lecture_title_en: "",
+        lecture_abstract: "",
+        lecture_abstract_en: "",
       },
     };
   },
