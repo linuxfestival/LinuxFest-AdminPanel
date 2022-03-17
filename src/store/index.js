@@ -3,13 +3,11 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-let VUE_APP_API_BASE;
-if(process.env.NODE_ENV === 'production'){
-  // VUE_APP_API_BASE = `${window.location.origin}/api`
-  VUE_APP_API_BASE = `${process.env.VUE_APP_API_BASE}`
-}else {
-  VUE_APP_API_BASE = `${process.env.VUE_APP_API_BASE}`
-}
+const DEFAULT_BASE_URL = 'https://linuxfest.aut.ac.ir'
+let VUE_APP_API_BASE = process.env.VUE_APP_API_BASE || DEFAULT_BASE_URL
+
+VUE_APP_API_BASE = `${VUE_APP_API_BASE}/api`
+
 export default new Vuex.Store({
   state: {
     token : localStorage.getItem('token') || '',
