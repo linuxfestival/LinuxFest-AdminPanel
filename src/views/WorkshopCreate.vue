@@ -22,8 +22,7 @@
 
                  <div class="mb-3">
                         <label for="prerequisites">Prerequisites:</label>   
-                        <textarea class="form-control" id="prerequisites" placeholder="Prerequisites..." v-model="inputWorkshop.prerequisites">
-                        </textarea>
+                        <vue-editor id="prerequisites" v-model="inputWorkshop.prerequisites"></vue-editor>
                 </div>
 
                <div class="mb-3">
@@ -80,10 +79,13 @@
     import axios from 'axios';
     import jalali from 'jalali-moment';
     import VuePersianDateTimePicket from "vue-persian-datetime-picker";
+    import { VueEditor } from "vue2-editor";
+
 export default {
     name : "WorkshopCreate",
     components : {
         datePicker : VuePersianDateTimePicket,
+        VueEditor
     },
     data() {
         return {

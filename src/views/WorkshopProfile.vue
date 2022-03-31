@@ -25,8 +25,9 @@
 
         <div class="mb-3">
           <label for="prerequisites">Prerequisites:</label>
-          <textarea class="form-control" id="prerequisites" placeholder="Prerequisites..."
-                    v-model="workshop.prerequisites"/>
+          <!-- <textarea class="form-control" id="prerequisites" placeholder="Prerequisites..."
+                    v-model="workshop.prerequisites"/> -->
+          <vue-editor  id="prerequisites" v-model="workshop.prerequisites"></vue-editor>
         </div>
 
         <div class="mb-3">
@@ -171,13 +172,15 @@ import jalali from 'jalali-moment'
 import VuePersianDateTimePicket from "vue-persian-datetime-picker";
 import VueCsvDownloader from 'vue-csv-downloader';
 import {BSpinner} from 'bootstrap-vue'
+  import { VueEditor } from "vue2-editor";
 
 export default {
   name: "WorkshopProfile",
   components: {
     datePicker: VuePersianDateTimePicket,
     VueCsvDownloader,
-    BSpinner
+    BSpinner,
+    VueEditor
   },
   data() {
     return {
