@@ -22,6 +22,13 @@
                     v-model="workshop.description"/>
         </div>
 
+
+        <div class="mb-3">
+          <label for="prerequisites">Prerequisites:</label>
+          <textarea class="form-control" id="prerequisites" placeholder="Prerequisites..."
+                    v-model="workshop.prerequisites"/>
+        </div>
+
         <div class="mb-3">
           <label for="cap">Capacity (Positive Integer):</label>
           <input type="number" class="form-control" id="cap" min="0" max="500" placeholder="Capacity..."
@@ -56,7 +63,7 @@
         <hr class="mb-4">
         <h4>current teachers</h4>
         <ul>
-          <li v-for="teacher in teachers">{{ teacher.fullName }}</li>
+          <li v-for="(teacher, index) in teachers" :key="index">{{ teacher.fullName }}</li>
         </ul>
         <label for="teachers"><b>Select Teachers:</b>(Required , Can Select Multiple Teachers, you should select previous
           teachers if necessary):</label>

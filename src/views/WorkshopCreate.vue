@@ -17,7 +17,12 @@
                 <div class="mb-3">
                         <label for="description">Description:</label>   
                         <textarea class="form-control" id="description" placeholder="Description..." v-model="inputWorkshop.description">
+                        </textarea>
+                </div>
 
+                 <div class="mb-3">
+                        <label for="prerequisites">Prerequisites:</label>   
+                        <textarea class="form-control" id="prerequisites" placeholder="Prerequisites..." v-model="inputWorkshop.prerequisites">
                         </textarea>
                 </div>
 
@@ -34,7 +39,7 @@
                             :value="teacher._id">{{teacher.fullName}}</option>
                 </select>
 
-                <div class="row" v-for="inputTime in inputWorkshop.times">
+                <div class="row" v-for="(inputTime, index) in inputWorkshop.times" :key="index">
                     <div class="col-md-6">
                         Start Time :
                         <date-picker
@@ -87,6 +92,7 @@ export default {
                 capacity : "20",
                 price : "100000",
                 description: "Workshop's description",
+                prerequisites: "",
                 teachers : [],
                 startTime : "",
                 endTime : "",
