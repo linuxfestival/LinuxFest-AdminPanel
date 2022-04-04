@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-const DEFAULT_BASE_URL = 'http://linuxfest.aut.ac.ir'
+const DEFAULT_BASE_URL = 'https://linuxfest.aut.ac.ir'
 let VUE_APP_API_BASE = process.env.VUE_APP_API_BASE || DEFAULT_BASE_URL
 
 VUE_APP_API_BASE = `${VUE_APP_API_BASE}/api`
