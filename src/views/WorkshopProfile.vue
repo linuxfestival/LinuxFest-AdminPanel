@@ -32,7 +32,7 @@
 
         <div class="mb-3">
           <label for="cap">Capacity (Positive Integer):</label>
-          <input type="number" class="form-control" id="cap" min="0" max="500" placeholder="Capacity..."
+          <input type="number" class="form-control" id="cap" min="0" max="1000" placeholder="Capacity..."
                  v-model="workshop.capacity">
         </div>
 
