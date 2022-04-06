@@ -7,6 +7,7 @@ import Users from "@/views/Users";
 import UsersProfile from "@/views/UsersProfile";
 import UsersCreate from "../views/UsersCreate";
 import Workshops from "@/views/Workshops"
+import WorkshopDump from "@/views/WorkshopDump"
 import WorkshopCreate from "@/views/WorkshopCreate";
 import Teachers from "@/views/Teachers";
 import TeacherCreate from "@/views/TeacherCreate"
@@ -50,6 +51,11 @@ const routes = [
         path : '/workshops',
         name : 'workshops',
         component : Workshops
+    },
+    {
+        path : '/workshops/dump',
+        name : 'workshopDump',
+        component : WorkshopDump
     },
     {
         path : '/createworkshop',
